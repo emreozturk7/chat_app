@@ -5,7 +5,7 @@ import 'package:flutter_chat_app/view/loading.dart';
 class SignIn extends StatefulWidget {
   final Function toggleView;
 
-  const SignIn({Key? key, this.toggleView}) : super(key: key);
+  const SignIn({Key? key, required this.toggleView}) : super(key: key);
 
   @override
   _SignInState createState() => _SignInState();

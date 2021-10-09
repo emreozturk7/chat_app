@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Register extends StatefulWidget {
-  const Register({Key? key}) : super(key: key);
+  const Register({Key? key, required this.toggleView}) : super(key: key);
+  final Function toggleView;
 
   @override
   State<Register> createState() => _RegisterState();
