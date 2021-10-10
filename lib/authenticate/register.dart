@@ -16,42 +16,47 @@ class _RegisterState extends State<Register> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Register'),
+        actions: [
+          TextButton(
+            child: const Text(
+              'Sign In',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+            onPressed: () {
+              widget.toggleView();
+            },
+          ),
+        ],
       ),
-      body: Center(
+      body: Container(
+        padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
         child: Form(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  controller: emailCtrl,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'E-mail',
-                  ),
+              TextFormField(
+                controller: emailCtrl,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'E-mail',
                 ),
               ),
               const SizedBox(height: 15.0),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  controller: passwordCtrl,
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Password',
-                  ),
+              TextFormField(
+                controller: passwordCtrl,
+                obscureText: true,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Password',
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(),
-                  onPressed: () {},
-                  child: const Text('Sign In'),
-                ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(),
+                onPressed: () {},
+                child: const Text('Register'),
               ),
             ],
           ),

@@ -25,6 +25,19 @@ class _SignInState extends State<SignIn> {
         ? const Loading()
         : Scaffold(
             appBar: AppBar(
+              actions: [
+                TextButton(
+                  child: const Text(
+                    'Register',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  onPressed: () {
+                    widget.toggleView();
+                  },
+                ),
+              ],
               title: const Text('Sign In'),
             ),
             body: Container(
@@ -36,26 +49,24 @@ class _SignInState extends State<SignIn> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        controller: emailCtrl,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'E-mail',
-                        ),
+                    TextFormField(
+                      validator: (val) => val!.isEmpty ? 'Enter Email' : null,
+                      controller: emailCtrl,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'E-mail',
                       ),
                     ),
                     const SizedBox(height: 15.0),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        controller: passwordCtrl,
-                        obscureText: true,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Password',
-                        ),
+                    TextFormField(
+                      validator: (val) => val!.length < 6
+                          ? 'Enter password 6+ Chars Long'
+                          : null,
+                      controller: passwordCtrl,
+                      obscureText: true,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Password',
                       ),
                     ),
                     ElevatedButton(
