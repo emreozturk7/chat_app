@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_chat_app/model/my_user.dart';
 import 'package:flutter_chat_app/services/auth.dart';
-import 'package:flutter_chat_app/view/home_page.dart';
+import 'package:flutter_chat_app/view/message_page.dart';
 import 'package:flutter_chat_app/view/wrapper.dart';
 import 'package:provider/provider.dart';
 
@@ -23,7 +23,7 @@ class Main extends StatelessWidget {
       initialData: null,
       child: MaterialApp(
         routes: {
-          'home_page': (context) => const HomePage(),
+          'message_page': (context) => const MessagePage(),
         },
         home: const Wrapper(),
       ),

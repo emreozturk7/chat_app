@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/services/auth.dart';
+import 'package:flutter_chat_app/view/message_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -18,6 +19,25 @@ class HomePage extends StatelessWidget {
           ),
         ],
         title: const Text('Home Page'),
+      ),
+      body: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              child: const Text('Message Page'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const MessagePage(),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
