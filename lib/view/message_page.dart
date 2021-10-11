@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_chat_app/view/home_page.dart';
 import 'package:image_picker/image_picker.dart';
 
 class MessagePage extends StatefulWidget {
@@ -22,12 +21,7 @@ class _MessagePageState extends State<MessagePage> {
         leadingWidth: 100,
         leading: InkWell(
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const HomePage(),
-              ),
-            );
+            Navigator.of(context).pop();
           },
           borderRadius: BorderRadius.circular(100),
           child: Row(
@@ -111,7 +105,7 @@ class _MessagePageState extends State<MessagePage> {
                 const SizedBox(width: 5),
                 Material(
                   borderRadius: BorderRadius.circular(100),
-                  color: Colors.green[900],
+                  color: Colors.blue,
                   child: InkWell(
                     borderRadius: BorderRadius.circular(100),
                     onTap: () {},
@@ -172,7 +166,7 @@ class _MessagePageState extends State<MessagePage> {
   ElevatedButton buildElevatedButton(Text text, ImageSource source) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        primary: Colors.orange,
+        primary: Colors.blue,
         elevation: 3,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
       ),
@@ -254,7 +248,7 @@ class ItemChat extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
-              color: isSender ? Colors.blue[900] : Colors.green,
+              color: isSender ? Colors.green[700] : Colors.grey[700],
               borderRadius: BorderRadius.only(
                 topLeft: const Radius.circular(15),
                 topRight: const Radius.circular(15),
@@ -268,7 +262,7 @@ class ItemChat extends StatelessWidget {
             ),
             padding: const EdgeInsets.all(15),
             child: const Text(
-              'Selam ben emre',
+              'selam hilal',
               style: TextStyle(
                 color: Colors.white,
               ),
