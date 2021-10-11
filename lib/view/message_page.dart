@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_app/view/home_page.dart';
 import 'package:image_picker/image_picker.dart';
 
 class MessagePage extends StatefulWidget {
@@ -12,63 +13,121 @@ class MessagePage extends StatefulWidget {
 }
 
 class _MessagePageState extends State<MessagePage> {
-  final TextEditingController _controller = TextEditingController();
   File? file;
   @override
   Widget build(BuildContext context) {
     var deviceSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Message Page'),
-      ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              child: SingleChildScrollView(
-                physics: const ScrollPhysics(),
-                child: ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: 100,
-                  itemBuilder: (context, index) {
-                    return const Text('Some text');
-                  },
-                ),
+        leadingWidth: 100,
+        leading: InkWell(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const HomePage(),
+              ),
+            );
+          },
+          borderRadius: BorderRadius.circular(100),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const SizedBox(width: 5),
+              const Icon(Icons.arrow_back),
+              const SizedBox(width: 5),
+              CircleAvatar(
+                radius: 25,
+                backgroundColor: Colors.grey,
+                child: Image.asset("assets/images/noimage.png"),
+              ),
+            ],
+          ),
+        ),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const [
+            Text(
+              'Lorem Ipsum',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
               ),
             ),
-            SizedBox(
-              height: 80,
-              width: deviceSize.width,
-              child: Card(
-                child: Row(
-                  children: <Widget>[
-                    SizedBox(width: deviceSize.width / 50),
-                    IconButton(
-                      icon: const Icon(Icons.add),
-                      onPressed: () {
-                        buildShowModalBottomSheet(context, deviceSize);
-                      },
-                    ),
-                    SizedBox(width: deviceSize.width / 35),
-                    SizedBox(
-                      width: ((deviceSize.width / 5) * 4),
-                      height: deviceSize.height / 12,
-                      child: TextField(
-                        controller: _controller,
-                        obscureText: true,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Deneme',
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+            Text(
+              'statusnya lorem',
+              style: TextStyle(
+                fontSize: 14,
               ),
             ),
           ],
         ),
+        centerTitle: false,
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView(
+              children: const [
+                ItemChat(
+                  isSender: false,
+                ),
+                ItemChat(
+                  isSender: true,
+                ),
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(
+              bottom: MediaQuery.of(context).size.height / 100,
+            ),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            width: MediaQuery.of(context).size.width,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.add),
+                  onPressed: () {
+                    buildShowModalBottomSheet(context, deviceSize);
+                  },
+                ),
+                Expanded(
+                  child: SizedBox(
+                    child: TextField(
+                      decoration: InputDecoration(
+                        prefixIcon: IconButton(
+                          icon: const Icon(Icons.emoji_emotions),
+                          onPressed: () {},
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 5),
+                Material(
+                  borderRadius: BorderRadius.circular(100),
+                  color: Colors.green[900],
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(100),
+                    onTap: () {},
+                    child: const Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Icon(
+                        Icons.send,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -173,5 +232,53 @@ class _MessagePageState extends State<MessagePage> {
         .child(path)
         .putFile(file);
     print(uploadTask);
+  }
+}
+
+class ItemChat extends StatelessWidget {
+  const ItemChat({
+    Key? key,
+    required this.isSender,
+  }) : super(key: key);
+  final bool isSender;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        vertical: 15,
+        horizontal: 20,
+      ),
+      child: Column(
+        crossAxisAlignment:
+            isSender ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: isSender ? Colors.blue[900] : Colors.green,
+              borderRadius: BorderRadius.only(
+                topLeft: const Radius.circular(15),
+                topRight: const Radius.circular(15),
+                bottomLeft: isSender
+                    ? const Radius.circular(15)
+                    : const Radius.circular(0),
+                bottomRight: isSender
+                    ? const Radius.circular(0)
+                    : const Radius.circular(15),
+              ),
+            ),
+            padding: const EdgeInsets.all(15),
+            child: const Text(
+              'Selam ben emre',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ),
+          const SizedBox(height: 5),
+          const Text('18:22 PM'),
+        ],
+      ),
+      alignment: isSender ? Alignment.centerRight : Alignment.centerLeft,
+    );
   }
 }
