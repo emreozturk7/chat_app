@@ -188,8 +188,6 @@ class _MessagePageState extends State<MessagePage> {
     setState(() {
       if (pickedVideo != null) {
         file = File(pickedVideo.path);
-      } else {
-        print('No Video Selected');
       }
     });
     if (pickedVideo != null) {
@@ -208,8 +206,6 @@ class _MessagePageState extends State<MessagePage> {
     setState(() {
       if (pickedPhoto != null) {
         file = File(pickedPhoto.path);
-      } else {
-        print('No Photo Selected');
       }
     });
     if (pickedPhoto != null) {
@@ -225,7 +221,7 @@ class _MessagePageState extends State<MessagePage> {
         .child('files')
         .child(path)
         .putFile(file);
-    print(uploadTask);
+    debugPrint(uploadTask.toString());
   }
 }
 
