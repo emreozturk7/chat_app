@@ -44,57 +44,91 @@ class _RegisterState extends State<Register> {
               child: Form(
                 key: _formKey,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    TextFormField(
-                      validator: (val) => val!.isEmpty ? 'Enter Email' : null,
-                      controller: emailCtrl,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'E-mail',
+                    Expanded(
+                      flex: 2,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Text(
+                            'Chat App',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 40,
+                              color: Colors.blue,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    const SizedBox(height: 15.0),
-                    TextFormField(
-                      validator: (val) => val != emailCtrl.text
-                          ? 'Please enter the same e-mail address'
-                          : null,
-                      controller: emailAgainCtrl,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'E-mail Again',
+                    Expanded(
+                      flex: 3,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          TextFormField(
+                            validator: (val) =>
+                                val!.isEmpty ? 'Enter Email' : null,
+                            controller: emailCtrl,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(100),
+                              ),
+                              labelText: 'E-mail',
+                            ),
+                          ),
+                          const SizedBox(height: 15.0),
+                          TextFormField(
+                            validator: (val) => val != emailCtrl.text
+                                ? 'Please enter the same e-mail address'
+                                : null,
+                            controller: emailAgainCtrl,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(100),
+                              ),
+                              labelText: 'E-mail Again',
+                            ),
+                          ),
+                          const SizedBox(height: 15.0),
+                          TextFormField(
+                            validator: (val) => val!.length < 6
+                                ? 'Enter password 6+ Chars Long'
+                                : null,
+                            controller: passwordCtrl,
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(100),
+                              ),
+                              labelText: 'Password',
+                            ),
+                          ),
+                          const SizedBox(height: 15.0),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(100),
+                              ),
+                            ),
+                            child: const Text('Register'),
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {
+                                setState(() => loading = true);
+                                dynamic result =
+                                    await _auth.registerWithEmailAndPassword(
+                                        emailCtrl.text, passwordCtrl.text);
+                                if (result == null) {
+                                  setState(() {
+                                    error = 'Please supply a valid email';
+                                    loading = false;
+                                  });
+                                }
+                              }
+                            },
+                          ),
+                        ],
                       ),
-                    ),
-                    const SizedBox(height: 15.0),
-                    TextFormField(
-                      validator: (val) => val!.length < 6
-                          ? 'Enter password 6+ Chars Long'
-                          : null,
-                      controller: passwordCtrl,
-                      obscureText: true,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Password',
-                      ),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(),
-                      child: const Text('Register'),
-                      onPressed: () async {
-                        if (_formKey.currentState!.validate()) {
-                          setState(() => loading = true);
-                          dynamic result =
-                              await _auth.registerWithEmailAndPassword(
-                                  emailCtrl.text, passwordCtrl.text);
-                          if (result == null) {
-                            setState(() {
-                              error = 'Please supply a valid email';
-                              loading = false;
-                            });
-                          }
-                        }
-                      },
                     ),
                   ],
                 ),
