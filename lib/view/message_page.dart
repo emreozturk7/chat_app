@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 
 class MessagePage extends StatefulWidget {
   const MessagePage({Key? key}) : super(key: key);
@@ -119,6 +120,32 @@ class _MessagePageState extends State<MessagePage> {
                   ),
                 ),
               ],
+            ),
+          ),
+          SizedBox(
+            height: 325,
+            child: EmojiPicker(
+              onEmojiSelected: (category, emoji) {},
+              onBackspacePressed: () {},
+              config: Config(
+                  columns: 7,
+                  emojiSizeMax: 32 * (Platform.isIOS ? 1.30 : 1.0),
+                  verticalSpacing: 0,
+                  horizontalSpacing: 0,
+                  initCategory: Category.RECENT,
+                  bgColor: const Color(0xFFF2F2F2),
+                  indicatorColor: Colors.blue,
+                  iconColor: Colors.grey,
+                  iconColorSelected: Colors.blue,
+                  progressIndicatorColor: Colors.blue,
+                  showRecentsTab: true,
+                  recentsLimit: 28,
+                  noRecentsText: "No Recents",
+                  noRecentsStyle:
+                      const TextStyle(fontSize: 20, color: Colors.black26),
+                  tabIndicatorAnimDuration: kTabScrollDuration,
+                  categoryIcons: const CategoryIcons(),
+                  buttonMode: ButtonMode.MATERIAL),
             ),
           ),
         ],
