@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/services/auth.dart';
-import 'package:flutter_chat_app/view/loading.dart';
+import 'package:flutter_chat_app/view/loading_screen.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
