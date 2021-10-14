@@ -48,24 +48,20 @@ class _SignInState extends State<SignIn> {
                 child: Column(
                   children: [
                     Expanded(
-                      flex: 2,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Text(
-                            'Chat App',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 40,
-                              color: Colors.blue,
-                            ),
+                        children: [
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.7,
+                            height: MediaQuery.of(context).size.height * 0.25,
+                            child: Image.asset("assets/images/chat.png"),
                           ),
                         ],
                       ),
                     ),
                     Expanded(
-                      flex: 3,
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           TextFormField(
@@ -115,6 +111,21 @@ class _SignInState extends State<SignIn> {
                                 }
                               }
                             },
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                              left: MediaQuery.of(context).size.width / 3.50,
+                              top: MediaQuery.of(context).size.height / 50,
+                            ),
+                            child: const Expanded(
+                              child: Text(
+                                'Chat App v1.0',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 10.0,
+                                ),
+                              ),
+                            ),
                           ),
                         ],
                       ),
