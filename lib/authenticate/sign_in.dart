@@ -48,6 +48,7 @@ class _SignInState extends State<SignIn> {
                 child: Column(
                   children: [
                     Expanded(
+                      flex: 2,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -60,6 +61,7 @@ class _SignInState extends State<SignIn> {
                       ),
                     ),
                     Expanded(
+                      flex: 3,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -117,13 +119,11 @@ class _SignInState extends State<SignIn> {
                               left: MediaQuery.of(context).size.width / 3.50,
                               top: MediaQuery.of(context).size.height / 50,
                             ),
-                            child: const Expanded(
-                              child: Text(
-                                'Chat App v1.0',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 10.0,
-                                ),
+                            child: const Text(
+                              'Chat App v1.0',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 10.0,
                               ),
                             ),
                           ),

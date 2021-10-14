@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_chat_app/model/my_user.dart';
 import 'package:flutter_chat_app/services/auth.dart';
-import 'package:flutter_chat_app/view/home_page.dart';
+import 'package:flutter_chat_app/view/message_home_page.dart';
+import 'package:flutter_chat_app/view/message_contacts.dart';
 import 'package:flutter_chat_app/view/message_page.dart';
 import 'package:flutter_chat_app/view/splash_screen.dart';
 import 'package:flutter_chat_app/view/wrapper.dart';
 import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,7 +23,7 @@ class Main extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: Future.delayed(
-        const Duration(seconds: 0),
+        const Duration(seconds: 3),
       ),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
@@ -29,10 +31,11 @@ class Main extends StatelessWidget {
             catchError: (_, __) => null,
             value: AuthService().user,
             initialData: null,
-            child: MaterialApp(
+            child: GetMaterialApp(
               routes: {
-                'message_page': (context) => const MessagePage(),
-                'home_page': (context) => const HomePage(),
+                '/message_page': (context) => const MessagePage(),
+                '/message_home_page': (context) => MessageHomePage(),
+                '/message_contacts': (context) => const MessageContacts(),
               },
               home: const Wrapper(),
             ),

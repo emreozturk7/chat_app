@@ -47,6 +47,7 @@ dev_dependencies:
   flutter_spinkit: ^5.1.0
   flutter_native_splash: ^1.2.4
   lottie: ^1.2.1
+  get: ^4.3.8
 
   # Fotograf ve Video Islemleri
   image_picker: ^0.8.4+2

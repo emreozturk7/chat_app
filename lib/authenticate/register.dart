@@ -46,7 +46,6 @@ class _RegisterState extends State<Register> {
                 child: Column(
                   children: [
                     Expanded(
-                      flex: 2,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: const [
@@ -62,7 +61,6 @@ class _RegisterState extends State<Register> {
                       ),
                     ),
                     Expanded(
-                      flex: 3,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
