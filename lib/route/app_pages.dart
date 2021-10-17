@@ -1,4 +1,4 @@
-import 'package:flutter_chat_app/view/message_contacts.dart';
+import 'package:flutter_chat_app/contacts/message_contacts.dart';
 import 'package:flutter_chat_app/view/message_home_page.dart';
 import 'package:flutter_chat_app/view/message_page.dart';
 import 'package:get/get.dart';
@@ -19,7 +19,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.MESSAGE_CONTACTS,
-      page: () => const MessageContacts(),
+      page: () => MessageContacts(),
     ),
   ];
 }

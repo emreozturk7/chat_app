@@ -1,8 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 class MessageContacts extends StatelessWidget {
-  const MessageContacts({Key? key}) : super(key: key);
-
+  MessageContacts({Key? key}) : super(key: key);
+  final List<Widget> contacts = List.generate(
+    20,
+    (index) => ListTile(
+      leading: CircleAvatar(
+        radius: 30,
+        backgroundColor: Colors.black26,
+        child: Image.asset(
+          "assets/images/noimage.png",
+          fit: BoxFit.cover,
+        ),
+      ),
+      title: Text(
+        'Emre${index + 1}',
+        style: const TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+      subtitle: Text(
+        'Alinan son mesaj ${index + 1}',
+        style: const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+      trailing: GestureDetector(
+        onTap: () => Get.toNamed("/message_page"),
+        child: const Chip(
+          label: Text("Message"),
+        ),
+      ),
+    ),
+  ).reversed.toList();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,9 +82,19 @@ class MessageContacts extends StatelessWidget {
           ),
         ),
       ),
-      body: const Center(
-        child: Text('Naber'),
-      ),
+      body: contacts.isEmpty
+          ? Center(
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.7,
+                height: MediaQuery.of(context).size.height * 0.7,
+                child: Lottie.asset("assets/lottie/empty.json"),
+              ),
+            )
+          : ListView.builder(
+              padding: EdgeInsets.zero,
+              itemCount: contacts.length,
+              itemBuilder: (context, index) => contacts[index],
+            ),
     );
   }
 }

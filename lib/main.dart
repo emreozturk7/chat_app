@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_chat_app/model/my_user.dart';
 import 'package:flutter_chat_app/services/auth.dart';
 import 'package:flutter_chat_app/view/message_home_page.dart';
-import 'package:flutter_chat_app/view/message_contacts.dart';
+import 'package:flutter_chat_app/contacts/message_contacts.dart';
 import 'package:flutter_chat_app/view/message_page.dart';
 import 'package:flutter_chat_app/view/splash_screen.dart';
 import 'package:flutter_chat_app/view/wrapper.dart';
@@ -35,7 +35,7 @@ class Main extends StatelessWidget {
               routes: {
                 '/message_page': (context) => const MessagePage(),
                 '/message_home_page': (context) => MessageHomePage(),
-                '/message_contacts': (context) => const MessageContacts(),
+                '/message_contacts': (context) => MessageContacts(),
               },
               home: const Wrapper(),
             ),
