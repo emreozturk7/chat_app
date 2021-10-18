@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_chat_app/model/my_user.dart';
+import 'package:flutter_chat_app/profile/profile_screen.dart';
 import 'package:flutter_chat_app/services/auth.dart';
 import 'package:flutter_chat_app/view/message_home_page.dart';
 import 'package:flutter_chat_app/contacts/message_contacts.dart';
@@ -36,6 +37,7 @@ class Main extends StatelessWidget {
                 '/message_page': (context) => const MessagePage(),
                 '/message_home_page': (context) => MessageHomePage(),
                 '/message_contacts': (context) => MessageContacts(),
+                '/profile_screen': (context) => ProfileView(),
               },
               home: const Wrapper(),
             ),

@@ -283,8 +283,8 @@ class ItemChat extends StatelessWidget {
                     : const Radius.circular(15),
               ),
             ),
-            padding: const EdgeInsets.all(15),
-            child: const Text(
+            padding: EdgeInsets.all(15),
+            child: Text(
               'selam hilal',
               style: TextStyle(
                 color: Colors.white,

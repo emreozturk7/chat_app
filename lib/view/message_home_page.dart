@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_chat_app/services/auth.dart';
 import 'package:get/get.dart';
 
 class MessageHomePage extends StatelessWidget {
@@ -38,7 +37,6 @@ class MessageHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AuthService _auth = AuthService();
     return Scaffold(
       body: Column(
         children: [
@@ -57,23 +55,26 @@ class MessageHomePage extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    "Chats",
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontSize: 35,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
                   IconButton(
-                    icon: const Icon(
-                      Icons.exit_to_app,
+                    icon: Icon(
+                      Icons.person,
                       size: 35,
                       color: Colors.blue,
                     ),
                     onPressed: () {
-                      _auth.signOut();
+                      Get.toNamed("/profile_screen");
                     },
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 120),
+                    child: Text(
+                      "Chats",
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 35,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ],
               ),
