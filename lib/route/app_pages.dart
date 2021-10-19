@@ -1,4 +1,4 @@
-import 'package:flutter_chat_app/contacts/message_contacts.dart';
+import 'package:flutter_chat_app/modules/contacts/contacts_view.dart';
 import 'package:flutter_chat_app/view/message_home_page.dart';
 import 'package:flutter_chat_app/view/message_page.dart';
 import 'package:get/get.dart';

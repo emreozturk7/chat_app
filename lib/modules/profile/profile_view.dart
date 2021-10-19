@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_chat_app/profile/profile_controller.dart';
+import 'package:flutter_chat_app/modules/profile/profile_controller.dart';
 import 'package:flutter_chat_app/services/auth.dart';
 import 'package:get/get.dart';
 
@@ -63,7 +63,9 @@ class ProfileView extends GetView<ProfileController> {
             SizedBox(height: deviceSize.height / 75),
             buildCard(
               "Update Status",
-              () {},
+              () {
+                Get.toNamed("/update_status_view");
+              },
               context,
               Icon(Icons.update),
             ),
@@ -80,7 +82,8 @@ class ProfileView extends GetView<ProfileController> {
               Icon(Icons.palette),
             ),
             SizedBox(height: deviceSize.height / 10),
-            Text("Chat App v.1.0"),
+            Text("Chat App"),
+            Text("v.1.0"),
           ],
         ),
       ),
