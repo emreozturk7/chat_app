@@ -34,7 +34,9 @@ class UpdateStatusView extends GetView<UpdateStatusController> {
             children: [
               TextField(
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
                   labelText: 'Input Status Here',
                 ),
               ),

@@ -71,7 +71,9 @@ class ProfileView extends GetView<ProfileController> {
             ),
             buildCard(
               "Change Profile",
-              () {},
+              () {
+                Get.toNamed("/change_profile_view");
+              },
               context,
               Icon(Icons.person),
             ),

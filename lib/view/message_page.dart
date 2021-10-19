@@ -19,6 +19,7 @@ class _MessagePageState extends State<MessagePage> {
     var deviceSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
         leadingWidth: 100,
         leading: InkWell(
           onTap: () {
@@ -29,7 +30,10 @@ class _MessagePageState extends State<MessagePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const SizedBox(width: 5),
-              const Icon(Icons.arrow_back),
+              const Icon(
+                Icons.arrow_back,
+                color: Colors.black,
+              ),
               const SizedBox(width: 5),
               CircleAvatar(
                 radius: 25,
@@ -45,6 +49,7 @@ class _MessagePageState extends State<MessagePage> {
             Text(
               'Lorem Ipsum',
               style: TextStyle(
+                color: Colors.black,
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
               ),
@@ -52,6 +57,7 @@ class _MessagePageState extends State<MessagePage> {
             Text(
               'statusnya lorem',
               style: TextStyle(
+                color: Colors.black,
                 fontSize: 14,
               ),
             ),

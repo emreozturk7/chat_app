@@ -59,7 +59,7 @@ class MessageHomePage extends StatelessWidget {
                     icon: Icon(
                       Icons.person,
                       size: 35,
-                      color: Colors.blue,
+                      color: Colors.black,
                     ),
                     onPressed: () {
                       Get.toNamed("/profile_screen");
@@ -70,7 +70,7 @@ class MessageHomePage extends StatelessWidget {
                     child: Text(
                       "Chats",
                       style: TextStyle(
-                        color: Colors.blue,
+                        color: Colors.black,
                         fontSize: 35,
                         fontWeight: FontWeight.bold,
                       ),
@@ -90,6 +90,7 @@ class MessageHomePage extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.black,
         child: const Icon(Icons.message),
         onPressed: () {
           Navigator.pushNamed(context, '/message_contacts');
