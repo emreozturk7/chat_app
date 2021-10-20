@@ -1,9 +1,9 @@
 import 'package:flutter_chat_app/modules/change_profile/change_profile_view.dart';
 import 'package:flutter_chat_app/modules/contacts/contacts_view.dart';
+import 'package:flutter_chat_app/modules/message/message_view.dart';
 import 'package:flutter_chat_app/modules/profile/profile_view.dart';
 import 'package:flutter_chat_app/modules/update_status/update_status_view.dart';
-import 'package:flutter_chat_app/view/message_home_page.dart';
-import 'package:flutter_chat_app/view/message_page.dart';
+import 'package:flutter_chat_app/modules/home/home_view.dart';
 import 'package:get/get.dart';
 
 part 'routes.dart';
@@ -14,15 +14,15 @@ class AppPages {
   static final routes = [
     GetPage(
       name: _Paths.MESSAGE_HOME_PAGE,
-      page: () => MessageHomePage(),
+      page: () => HomeView(),
     ),
     GetPage(
       name: _Paths.MESSAGE_PAGE,
-      page: () => const MessagePage(),
+      page: () => const MessageView(),
     ),
     GetPage(
       name: _Paths.MESSAGE_CONTACTS,
-      page: () => MessageContacts(),
+      page: () => ContactsView(),
     ),
     GetPage(
       name: _Paths.PROFILE_SCREEN,

@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 
-class MessagePage extends StatefulWidget {
-  const MessagePage({Key? key}) : super(key: key);
+class MessageView extends StatefulWidget {
+  const MessageView({Key? key}) : super(key: key);
 
   @override
-  _MessagePageState createState() => _MessagePageState();
+  _MessageViewState createState() => _MessageViewState();
 }
 
-class _MessagePageState extends State<MessagePage> {
+class _MessageViewState extends State<MessageView> {
   File? file;
   @override
   Widget build(BuildContext context) {

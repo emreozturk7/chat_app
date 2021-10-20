@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
-class MessageContacts extends StatelessWidget {
-  MessageContacts({Key? key}) : super(key: key);
+class ContactsView extends StatelessWidget {
+  ContactsView({Key? key}) : super(key: key);
   final List<Widget> contacts = List.generate(
     20,
     (index) => ListTile(

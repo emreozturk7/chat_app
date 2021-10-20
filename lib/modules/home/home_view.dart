@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MessageHomePage extends StatelessWidget {
-  MessageHomePage({Key? key}) : super(key: key);
+class HomeView extends StatelessWidget {
+  HomeView({Key? key}) : super(key: key);
   final List<Widget> myChats = List.generate(
     20,
     (index) => ListTile(

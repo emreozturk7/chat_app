@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_app/modules/view/loading_view.dart';
 import 'package:flutter_chat_app/services/auth.dart';
-import 'package:flutter_chat_app/view/loading_screen.dart';
 
 class Register extends StatefulWidget {
   const Register({Key? key, required this.toggleView}) : super(key: key);
@@ -22,7 +22,7 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return loading
-        ? const Loading()
+        ? const LoadingView()
         : Scaffold(
             appBar: AppBar(
               title: const Text('Register'),
