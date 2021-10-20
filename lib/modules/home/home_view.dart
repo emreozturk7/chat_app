@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_app/modules/home/home_controller.dart';
 import 'package:get/get.dart';
 
 class HomeView extends StatelessWidget {
@@ -37,6 +38,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final HomeController _controller = Get.put(HomeController());
     return Scaffold(
       body: Column(
         children: [

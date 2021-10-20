@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_chat_app/modules/update_status/update_status_controller.dart';
 
-class UpdateStatusView extends GetView<UpdateStatusController> {
+class UpdateStatusView extends StatelessWidget {
   const UpdateStatusView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var deviceSize = MediaQuery.of(context).size;
+    final UpdateStatusController _controller =
+        Get.put(UpdateStatusController());
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -33,6 +35,7 @@ class UpdateStatusView extends GetView<UpdateStatusController> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               TextField(
+                controller: _controller.statusCtrl,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20.0),

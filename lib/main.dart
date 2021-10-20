@@ -36,7 +36,7 @@ class Main extends StatelessWidget {
             initialData: null,
             child: GetMaterialApp(
               routes: {
-                '/message_page': (context) => const MessageView(),
+                '/message_page': (context) => MessageView(),
                 '/message_home_page': (context) => HomeView(),
                 '/message_contacts': (context) => ContactsView(),
                 '/profile_screen': (context) => ProfileView(),

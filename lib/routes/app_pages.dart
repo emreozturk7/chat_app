@@ -18,7 +18,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.MESSAGE_VIEW,
-      page: () => const MessageView(),
+      page: () => MessageView(),
     ),
     GetPage(
       name: _Paths.CONTACTS_VIEW,

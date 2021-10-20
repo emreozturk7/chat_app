@@ -1,40 +1,31 @@
 import 'dart:io';
 
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:flutter_chat_app/modules/message/message_controller.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+import 'package:get/get.dart';
 
-class MessageView extends StatefulWidget {
-  const MessageView({Key? key}) : super(key: key);
-
-  @override
-  _MessageViewState createState() => _MessageViewState();
-}
-
-class _MessageViewState extends State<MessageView> {
-  File? file;
+class MessageView extends StatelessWidget {
+  MessageView({Key? key, controller}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    var deviceSize = MediaQuery.of(context).size;
+    final MessageController _controller = Get.put(MessageController());
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         leadingWidth: 100,
         leading: InkWell(
-          onTap: () {
-            Navigator.of(context).pop();
-          },
+          onTap: () => Get.back(),
           borderRadius: BorderRadius.circular(100),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const SizedBox(width: 5),
-              const Icon(
+              SizedBox(width: 5),
+              Icon(
                 Icons.arrow_back,
                 color: Colors.black,
               ),
-              const SizedBox(width: 5),
+              SizedBox(width: 5),
               CircleAvatar(
                 radius: 25,
                 backgroundColor: Colors.grey,
@@ -90,17 +81,19 @@ class _MessageViewState extends State<MessageView> {
               children: [
                 IconButton(
                   icon: const Icon(Icons.add),
-                  onPressed: () {
-                    buildShowModalBottomSheet(context, deviceSize);
-                  },
+                  onPressed: () {},
                 ),
                 Expanded(
                   child: SizedBox(
                     child: TextField(
+                      controller: _controller.chatCtrl,
+                      focusNode: _controller.focusNode,
                       decoration: InputDecoration(
                         prefixIcon: IconButton(
                           icon: const Icon(Icons.emoji_emotions),
-                          onPressed: () {},
+                          onPressed: () {
+                            _controller.isShowEmoji.toggle();
+                          },
                         ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(100),
@@ -128,133 +121,43 @@ class _MessageViewState extends State<MessageView> {
               ],
             ),
           ),
-          SizedBox(
-            height: 325,
-            child: EmojiPicker(
-              onEmojiSelected: (category, emoji) {},
-              onBackspacePressed: () {},
-              config: Config(
-                  columns: 7,
-                  emojiSizeMax: 32 * (Platform.isIOS ? 1.30 : 1.0),
-                  verticalSpacing: 0,
-                  horizontalSpacing: 0,
-                  initCategory: Category.RECENT,
-                  bgColor: const Color(0xFFF2F2F2),
-                  indicatorColor: Colors.blue,
-                  iconColor: Colors.grey,
-                  iconColorSelected: Colors.blue,
-                  progressIndicatorColor: Colors.blue,
-                  showRecentsTab: true,
-                  recentsLimit: 28,
-                  noRecentsText: "No Recents",
-                  noRecentsStyle:
-                      const TextStyle(fontSize: 20, color: Colors.black26),
-                  tabIndicatorAnimDuration: kTabScrollDuration,
-                  categoryIcons: const CategoryIcons(),
-                  buttonMode: ButtonMode.MATERIAL),
-            ),
+          Obx(
+            () => (_controller.isShowEmoji.isTrue)
+                ? SizedBox(
+                    height: 325,
+                    child: EmojiPicker(
+                      onEmojiSelected: (category, emoji) {
+                        _controller.addEmojiToChat(emoji);
+                      },
+                      onBackspacePressed: () {
+                        _controller.deleteEmoji();
+                      },
+                      config: Config(
+                          columns: 7,
+                          emojiSizeMax: 32 * (Platform.isIOS ? 1.30 : 1.0),
+                          verticalSpacing: 0,
+                          horizontalSpacing: 0,
+                          initCategory: Category.RECENT,
+                          bgColor: const Color(0xFFF2F2F2),
+                          indicatorColor: Colors.blue,
+                          iconColor: Colors.grey,
+                          iconColorSelected: Colors.blue,
+                          progressIndicatorColor: Colors.blue,
+                          showRecentsTab: true,
+                          recentsLimit: 28,
+                          noRecentsText: "No Recents",
+                          noRecentsStyle: const TextStyle(
+                              fontSize: 20, color: Colors.black26),
+                          tabIndicatorAnimDuration: kTabScrollDuration,
+                          categoryIcons: const CategoryIcons(),
+                          buttonMode: ButtonMode.MATERIAL),
+                    ),
+                  )
+                : SizedBox(),
           ),
         ],
       ),
     );
-  }
-
-  Future<void> buildShowModalBottomSheet(
-      BuildContext context, Size deviceSize) {
-    return showModalBottomSheet<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return Container(
-          height: deviceSize.height / 2,
-          color: Colors.white,
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                buildElevatedButton(
-                  const Text('Select Photo'),
-                  ImageSource.gallery,
-                ),
-                buildElevatedButton(
-                  const Text('Take a Photo'),
-                  ImageSource.camera,
-                ),
-                buildElevatedButton(
-                  const Text('Select Video'),
-                  ImageSource.gallery,
-                ),
-                buildElevatedButton(
-                  const Text('Take a Video'),
-                  ImageSource.camera,
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  ElevatedButton buildElevatedButton(Text text, ImageSource source) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        primary: Colors.blue,
-        elevation: 3,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-      ),
-      child: text,
-      onPressed: () {
-        selectPhoto(source);
-      },
-    );
-  }
-
-  Future<XFile?> selectVideo(ImageSource source) async {
-    final ImagePicker _picker = ImagePicker();
-
-    final XFile? pickedVideo = await _picker.pickVideo(
-      source: source,
-      maxDuration: const Duration(seconds: 90),
-    );
-
-    setState(() {
-      if (pickedVideo != null) {
-        file = File(pickedVideo.path);
-      }
-    });
-    if (pickedVideo != null) {
-      uploadStorage(file!);
-    }
-  }
-
-  Future<XFile?> selectPhoto(ImageSource source) async {
-    final ImagePicker _picker = ImagePicker();
-
-    final XFile? pickedPhoto = await _picker.pickImage(
-      source: source,
-      imageQuality: 50,
-    );
-
-    setState(() {
-      if (pickedPhoto != null) {
-        file = File(pickedPhoto.path);
-      }
-    });
-    if (pickedPhoto != null) {
-      uploadStorage(file!);
-    }
-  }
-
-  Future<String?> uploadStorage(File file) async {
-    String path = '${DateTime.now().millisecondsSinceEpoch}';
-
-    TaskSnapshot uploadTask = await FirebaseStorage.instance
-        .ref()
-        .child('files')
-        .child(path)
-        .putFile(file);
-    debugPrint(uploadTask.toString());
   }
 }
 

@@ -20,7 +20,7 @@ class ProfileView extends GetView<ProfileController> {
             color: Colors.black,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Get.back();
           },
         ),
         actions: [

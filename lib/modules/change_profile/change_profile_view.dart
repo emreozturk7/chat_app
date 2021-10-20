@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:flutter_chat_app/modules/change_profile/change_profile_controller.dart';
+import 'package:get/get.dart';
 
-class ChangeProfileView extends GetView<ChangeProfileController> {
+class ChangeProfileView extends StatelessWidget {
   const ChangeProfileView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final ChangeProfileController _controller =
+        Get.put(ChangeProfileController());
     var deviceSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -45,6 +47,7 @@ class ChangeProfileView extends GetView<ChangeProfileController> {
               ),
               SizedBox(height: deviceSize.height / 25),
               TextField(
+                controller: _controller.emailCtrl,
                 cursorColor: Colors.black,
                 decoration: InputDecoration(
                   labelText: 'Email',
@@ -65,6 +68,7 @@ class ChangeProfileView extends GetView<ChangeProfileController> {
               ),
               SizedBox(height: deviceSize.height / 50),
               TextField(
+                controller: _controller.nameCtrl,
                 cursorColor: Colors.black,
                 decoration: InputDecoration(
                   labelText: 'Name',
@@ -85,6 +89,7 @@ class ChangeProfileView extends GetView<ChangeProfileController> {
               ),
               SizedBox(height: deviceSize.height / 50),
               TextField(
+                controller: _controller.statusCtrl,
                 cursorColor: Colors.black,
                 decoration: InputDecoration(
                   labelText: 'Status',

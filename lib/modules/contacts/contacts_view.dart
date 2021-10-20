@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_app/modules/contacts/contacts_controller.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -39,6 +40,7 @@ class ContactsView extends StatelessWidget {
   ).reversed.toList();
   @override
   Widget build(BuildContext context) {
+    final ContactsController _controller = Get.put(ContactsController());
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(140),
@@ -57,6 +59,7 @@ class ContactsView extends StatelessWidget {
             child: Align(
               alignment: Alignment.bottomCenter,
               child: TextField(
+                controller: _controller.searchCtrl,
                 decoration: InputDecoration(
                   fillColor: Colors.white,
                   filled: true,
@@ -82,19 +85,21 @@ class ContactsView extends StatelessWidget {
           ),
         ),
       ),
-      body: contacts.isEmpty
-          ? Center(
-              child: Container(
-                width: MediaQuery.of(context).size.width * 0.7,
-                height: MediaQuery.of(context).size.height * 0.7,
-                child: Lottie.asset("assets/lottie/empty.json"),
+      body: Obx(
+        () => _controller.tempSearch.isEmpty
+            ? Center(
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  height: MediaQuery.of(context).size.height * 0.7,
+                  child: Lottie.asset("assets/lottie/empty.json"),
+                ),
+              )
+            : ListView.builder(
+                padding: EdgeInsets.zero,
+                itemCount: contacts.length,
+                itemBuilder: (context, index) => contacts[index],
               ),
-            )
-          : ListView.builder(
-              padding: EdgeInsets.zero,
-              itemCount: contacts.length,
-              itemBuilder: (context, index) => contacts[index],
-            ),
+      ),
     );
   }
 }
