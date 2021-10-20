@@ -6,26 +6,26 @@ import 'package:flutter_chat_app/modules/update_status/update_status_view.dart';
 import 'package:flutter_chat_app/modules/home/home_view.dart';
 import 'package:get/get.dart';
 
-part 'routes.dart';
+part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
 
   static final routes = [
     GetPage(
-      name: _Paths.MESSAGE_HOME_PAGE,
+      name: _Paths.HOME_VIEW,
       page: () => HomeView(),
     ),
     GetPage(
-      name: _Paths.MESSAGE_PAGE,
+      name: _Paths.MESSAGE_VIEW,
       page: () => const MessageView(),
     ),
     GetPage(
-      name: _Paths.MESSAGE_CONTACTS,
+      name: _Paths.CONTACTS_VIEW,
       page: () => ContactsView(),
     ),
     GetPage(
-      name: _Paths.PROFILE_SCREEN,
+      name: _Paths.PROFILE_VIEW,
       page: () => const ProfileView(),
     ),
     GetPage(
