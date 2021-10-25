@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/modules/home/home_controller.dart';
+import 'package:flutter_chat_app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class HomeView extends StatelessWidget {
@@ -7,7 +8,7 @@ class HomeView extends StatelessWidget {
   final List<Widget> myChats = List.generate(
     20,
     (index) => ListTile(
-      onTap: () => Get.toNamed("/message_page"),
+      onTap: () => Get.toNamed(Routes.MESSAGE_VIEW),
       leading: CircleAvatar(
         radius: 30,
         backgroundColor: Colors.black26,
@@ -64,7 +65,7 @@ class HomeView extends StatelessWidget {
                       color: Colors.black,
                     ),
                     onPressed: () {
-                      Get.toNamed("/profile_screen");
+                      Get.toNamed(Routes.PROFILE_VIEW);
                     },
                   ),
                   Padding(
@@ -95,7 +96,7 @@ class HomeView extends StatelessWidget {
         backgroundColor: Colors.black,
         child: const Icon(Icons.message),
         onPressed: () {
-          Navigator.pushNamed(context, '/message_contacts');
+          Get.toNamed(Routes.CONTACTS_VIEW);
         },
       ),
     );

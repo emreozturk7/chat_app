@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/controller/auth_controller.dart';
-import 'package:flutter_chat_app/modules/google/google_controller.dart';
+import 'package:flutter_chat_app/modules/login/login_controller.dart';
 import 'package:get/get.dart';
 
-class GoogleView extends StatelessWidget {
-  final GoogleController _controller = Get.put(GoogleController());
+class LoginView extends StatelessWidget {
+  final LoginController _controller = Get.put(LoginController());
   final authCtrl = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class GoogleView extends StatelessWidget {
                 ),
               ),
               child: const Text('Google Sign In'),
-              onPressed: () async {},
+              onPressed: () => authCtrl.login(),
             ),
           ],
         ),

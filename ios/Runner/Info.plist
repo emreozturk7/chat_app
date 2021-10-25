@@ -41,6 +41,17 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>CFBundleURLTypes</key>
+    <array>
+    	<dict>
+    		<key>CFBundleTypeRole</key>
+    		<string>Editor</string>
+    		<key>CFBundleURLSchemes</key>
+    		<array>
+    			<string>com.googleusercontent.apps.435693511172-d6hsksdes0iim4jngshdcoqb8buumes1</string>
+    		</array>
+    	</dict>
+    </array>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>To choose an avatar</string>
 	<key>NSCameraUsageDescription</key>

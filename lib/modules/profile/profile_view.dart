@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_app/controller/auth_controller.dart';
 import 'package:flutter_chat_app/modules/profile/profile_controller.dart';
-import 'package:flutter_chat_app/services/auth.dart';
+import 'package:flutter_chat_app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
-class ProfileView extends GetView<ProfileController> {
-  const ProfileView({Key? key}) : super(key: key);
-
+class ProfileView extends StatelessWidget {
+  final ProfileController _controller = Get.put(ProfileController());
+  final authCtrl = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
-    AuthService _auth = AuthService();
     var deviceSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -30,7 +30,7 @@ class ProfileView extends GetView<ProfileController> {
               color: Colors.black,
             ),
             onPressed: () {
-              _auth.signOut();
+              authCtrl.logout();
             },
           ),
         ],
@@ -64,7 +64,7 @@ class ProfileView extends GetView<ProfileController> {
             buildCard(
               "Update Status",
               () {
-                Get.toNamed("/update_status_view");
+                Get.toNamed(Routes.UPDATE_STATUS_VIEW);
               },
               context,
               Icon(Icons.update),
@@ -72,7 +72,7 @@ class ProfileView extends GetView<ProfileController> {
             buildCard(
               "Change Profile",
               () {
-                Get.toNamed("/change_profile_view");
+                Get.toNamed(Routes.CHANGE_PROFILE_VIEW);
               },
               context,
               Icon(Icons.person),

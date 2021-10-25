@@ -9,7 +9,7 @@ class AuthController extends GetxController {
   var isSkipIntro = false.obs;
   var isAuth = false.obs;
 
-  GoogleSignIn _googleSignIn = GoogleSignIn();
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
   GoogleSignInAccount? _currentUser;
   UserCredential? userCredential;
 
@@ -39,16 +39,35 @@ class AuthController extends GetxController {
   }
 
   Future<void> login() async {
-    //Get.offAllNamed(Routes.HOME_VIEW);
     try {
-      await _googleSignIn.signIn();
+      await _googleSignIn.signOut();
+
+      await _googleSignIn.signIn().then((value) => _currentUser = value);
+
+      final isSignIn = await _googleSignIn.isSignedIn();
+
+      if (isSignIn) {
+        final googleAuth = await _currentUser!.authentication;
+
+        final credential = GoogleAuthProvider.credential(
+          idToken: googleAuth.idToken,
+          accessToken: googleAuth.accessToken,
+        );
+        await FirebaseAuth.instance
+            .signInWithCredential(credential)
+            .then((value) => userCredential = value);
+
+        isAuth.value = true;
+        Get.offAllNamed(Routes.HOME_VIEW);
+      } else {}
     } catch (error) {
       print(error);
     }
   }
 
   Future<void> logout() async {
-    Get.offAllNamed(Routes.GOOGLE_VIEW);
+    await _googleSignIn.signOut();
+    Get.offAllNamed(Routes.LOGIN_VIEW);
   }
 
   void changeProfile(String name, String status) {}

@@ -36,7 +36,7 @@ class Main extends StatelessWidget {
               initialRoute: authCtrl.isSkipIntro.isTrue
                   ? authCtrl.isAuth.isTrue
                       ? Routes.HOME_VIEW
-                      : Routes.GOOGLE_VIEW
+                      : Routes.LOGIN_VIEW
                   : Routes.INTRODUCTION_VIEW,
               getPages: AppPages.routes,
             ),
@@ -50,32 +50,3 @@ class Main extends StatelessWidget {
     );
   }
 }
-
-/*
-return FutureBuilder(
-      future: Future.delayed(
-        const Duration(seconds: 3),
-      ),
-      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return StreamProvider<MyUser?>.value(
-            catchError: (_, __) => null,
-            value: AuthService().user,
-            initialData: null,
-            child: GetMaterialApp(
-              routes: {
-                '/message_page': (context) => MessageView(),
-                '/message_home_page': (context) => HomeView(),
-                '/message_contacts': (context) => ContactsView(),
-                '/profile_screen': (context) => ProfileView(),
-                '/update_status_view': (context) => UpdateStatusView(),
-                '/change_profile_view': (context) => ChangeProfileView(),
-              },
-              home: const Wrapper(),
-            ),
-          );
-        }
-        return const SplashScreen();
-      },
-    );
- */
