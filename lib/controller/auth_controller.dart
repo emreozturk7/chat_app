@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AuthController extends GetxController {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   var isSkipIntro = false.obs;
   var isAuth = false.obs;
 
@@ -38,7 +39,7 @@ class AuthController extends GetxController {
     return true;
   }
 
-  Future<void> login() async {
+  Future<void> googleSignInAndRegister() async {
     try {
       await _googleSignIn.signOut();
 
@@ -53,7 +54,7 @@ class AuthController extends GetxController {
           idToken: googleAuth.idToken,
           accessToken: googleAuth.accessToken,
         );
-        await FirebaseAuth.instance
+        await _auth
             .signInWithCredential(credential)
             .then((value) => userCredential = value);
 

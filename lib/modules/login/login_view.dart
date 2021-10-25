@@ -22,7 +22,7 @@ class LoginView extends StatelessWidget {
                 ),
               ),
               child: const Text('Google Sign In'),
-              onPressed: () => authCtrl.login(),
+              onPressed: () => authCtrl.googleSignInAndRegister(),
             ),
           ],
         ),
