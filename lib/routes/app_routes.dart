@@ -9,6 +9,8 @@ abstract class Routes {
   static const PROFILE_VIEW = _Paths.PROFILE_VIEW;
   static const UPDATE_STATUS_VIEW = _Paths.UPDATE_STATUS_VIEW;
   static const CHANGE_PROFILE_VIEW = _Paths.CHANGE_PROFILE_VIEW;
+  static const GOOGLE_VIEW = _Paths.GOOGLE_VIEW;
+  static const INTRODUCTION_VIEW = _Paths.INTRODUCTION_VIEW;
 }
 
 abstract class _Paths {
@@ -18,4 +20,6 @@ abstract class _Paths {
   static const PROFILE_VIEW = '/profile_view';
   static const UPDATE_STATUS_VIEW = '/update_status_view';
   static const CHANGE_PROFILE_VIEW = '/change_profile_view';
+  static const GOOGLE_VIEW = '/google_view';
+  static const INTRODUCTION_VIEW = '/introduction_view';
 }

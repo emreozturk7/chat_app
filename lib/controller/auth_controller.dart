@@ -1,4 +1,5 @@
 import 'package:flutter_chat_app/model/users_model.dart';
+import 'package:flutter_chat_app/routes/app_pages.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -29,13 +30,26 @@ class AuthController extends GetxController {
     });
   }
 
-  Future<bool> skipIntro() async {}
+  Future<bool> skipIntro() async {
+    return true;
+  }
 
-  Future<bool> autoLogin() async {}
+  Future<bool> autoLogin() async {
+    return true;
+  }
 
-  Future<void> login() async {}
+  Future<void> login() async {
+    //Get.offAllNamed(Routes.HOME_VIEW);
+    try {
+      await _googleSignIn.signIn();
+    } catch (error) {
+      print(error);
+    }
+  }
 
-  Future<void> logout() async {}
+  Future<void> logout() async {
+    Get.offAllNamed(Routes.GOOGLE_VIEW);
+  }
 
   void changeProfile(String name, String status) {}
 

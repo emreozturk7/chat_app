@@ -1,32 +1,60 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_chat_app/model/my_user.dart';
-import 'package:flutter_chat_app/modules/change_profile/change_profile_view.dart';
-import 'package:flutter_chat_app/modules/contacts/contacts_view.dart';
-import 'package:flutter_chat_app/modules/message/message_view.dart';
-import 'package:flutter_chat_app/modules/profile/profile_view.dart';
-import 'package:flutter_chat_app/modules/update_status/update_status_view.dart';
+import 'package:flutter_chat_app/controller/auth_controller.dart';
+import 'package:flutter_chat_app/routes/app_pages.dart';
 import 'package:flutter_chat_app/utils/splash_screen.dart';
-import 'package:flutter_chat_app/modules/authenticate/wrapper.dart';
-import 'package:flutter_chat_app/services/auth.dart';
-import 'package:flutter_chat_app/modules/home/home_view.dart';
-import 'package:provider/provider.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const Main());
+  await GetStorage.init();
+  runApp(Main());
 }
 
 class Main extends StatelessWidget {
-  const Main({Key? key}) : super(key: key);
+  final authCtrl = Get.put(AuthController(), permanent: true);
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: Future.delayed(
-        const Duration(seconds: 0),
+        Duration(seconds: 0),
+      ),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          return Obx(
+            () => GetMaterialApp(
+              title: 'Chat App',
+              theme: ThemeData(
+                brightness: Brightness.light,
+                primaryColor: Colors.white,
+                accentColor: Colors.black,
+                buttonColor: Colors.red[900],
+              ),
+              initialRoute: authCtrl.isSkipIntro.isTrue
+                  ? authCtrl.isAuth.isTrue
+                      ? Routes.HOME_VIEW
+                      : Routes.GOOGLE_VIEW
+                  : Routes.INTRODUCTION_VIEW,
+              getPages: AppPages.routes,
+            ),
+          );
+        }
+        return FutureBuilder(
+          future: authCtrl.firstInitialized(),
+          builder: (context, snapshot) => SplashScreen(),
+        );
+      },
+    );
+  }
+}
+
+/*
+return FutureBuilder(
+      future: Future.delayed(
+        const Duration(seconds: 3),
       ),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
@@ -50,5 +78,4 @@ class Main extends StatelessWidget {
         return const SplashScreen();
       },
     );
-  }
-}
+ */

@@ -6,10 +6,9 @@ import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:get/get.dart';
 
 class MessageView extends StatelessWidget {
-  MessageView({Key? key, controller}) : super(key: key);
+  final MessageController _controller = Get.put(MessageController());
   @override
   Widget build(BuildContext context) {
-    final MessageController _controller = Get.put(MessageController());
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,

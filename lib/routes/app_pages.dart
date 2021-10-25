@@ -1,5 +1,7 @@
 import 'package:flutter_chat_app/modules/change_profile/change_profile_view.dart';
 import 'package:flutter_chat_app/modules/contacts/contacts_view.dart';
+import 'package:flutter_chat_app/modules/google/google_view.dart';
+import 'package:flutter_chat_app/modules/introduction/introduction_view.dart';
 import 'package:flutter_chat_app/modules/message/message_view.dart';
 import 'package:flutter_chat_app/modules/profile/profile_view.dart';
 import 'package:flutter_chat_app/modules/update_status/update_status_view.dart';
@@ -35,6 +37,14 @@ class AppPages {
     GetPage(
       name: _Paths.CHANGE_PROFILE_VIEW,
       page: () => const ChangeProfileView(),
+    ),
+    GetPage(
+      name: _Paths.GOOGLE_VIEW,
+      page: () => GoogleView(),
+    ),
+    GetPage(
+      name: _Paths.INTRODUCTION_VIEW,
+      page: () => IntroductionView(),
     ),
   ];
 }
