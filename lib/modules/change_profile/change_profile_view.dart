@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_app/controller/auth_controller.dart';
 import 'package:flutter_chat_app/modules/change_profile/change_profile_controller.dart';
 import 'package:get/get.dart';
 
 class ChangeProfileView extends StatelessWidget {
-  const ChangeProfileView({Key? key}) : super(key: key);
-
+  final ChangeProfileController _controller =
+      Get.put(ChangeProfileController());
+  final authCtrl = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
-    final ChangeProfileController _controller =
-        Get.put(ChangeProfileController());
+    _controller.emailCtrl.text = authCtrl.user.value.email!;
+    _controller.nameCtrl.text = authCtrl.user.value.name!;
+    _controller.statusCtrl.text = authCtrl.user.value.status ?? '';
     var deviceSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(

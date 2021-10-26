@@ -36,7 +36,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.CHANGE_PROFILE_VIEW,
-      page: () => const ChangeProfileView(),
+      page: () => ChangeProfileView(),
     ),
     GetPage(
       name: _Paths.LOGIN_VIEW,
