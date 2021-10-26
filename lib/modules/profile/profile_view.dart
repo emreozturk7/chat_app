@@ -1,119 +1,146 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/controller/auth_controller.dart';
-import 'package:flutter_chat_app/modules/profile/profile_controller.dart';
 import 'package:flutter_chat_app/routes/app_pages.dart';
 import 'package:get/get.dart';
+import 'package:avatar_glow/avatar_glow.dart';
 
 class ProfileView extends StatelessWidget {
-  final ProfileController _controller = Get.put(ProfileController());
-  final authCtrl = Get.find<AuthController>();
+  final authC = Get.find<AuthController>();
+
   @override
   Widget build(BuildContext context) {
-    var deviceSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
+        elevation: 0,
         leading: IconButton(
+          onPressed: () => Get.back(),
           icon: Icon(
             Icons.arrow_back,
             color: Colors.black,
           ),
-          onPressed: () {
-            Get.back();
-          },
         ),
         actions: [
           IconButton(
+            onPressed: () => authC.logout(),
             icon: Icon(
               Icons.logout,
               color: Colors.black,
             ),
-            onPressed: () {
-              authCtrl.logout();
-            },
           ),
         ],
       ),
-      body: Center(
-        child: Column(
-          children: [
-            SizedBox(height: deviceSize.height / 75),
-            CircleAvatar(
-              child: Image.asset("assets/images/noimage.png"),
-              backgroundColor: Colors.grey,
-              radius: 100,
-            ),
-            SizedBox(height: deviceSize.height / 75),
-            Text(
-              "Lorem Ipsum",
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: deviceSize.height / 75),
-            Text(
-              "lorem.ipsum@gmail.com",
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: deviceSize.height / 75),
-            buildCard(
-              "Update Status",
-              () {
-                Get.toNamed(Routes.UPDATE_STATUS_VIEW);
-              },
-              context,
-              Icon(Icons.update),
-            ),
-            buildCard(
-              "Change Profile",
-              () {
-                Get.toNamed(Routes.CHANGE_PROFILE_VIEW);
-              },
-              context,
-              Icon(Icons.person),
-            ),
-            buildCard(
-              "Change Theme",
-              () {},
-              context,
-              Icon(Icons.palette),
-            ),
-            SizedBox(height: deviceSize.height / 10),
-            Text("Chat App"),
-            Text("v.1.0"),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Card buildCard(
-      String name, VoidCallback function, BuildContext context, Icon icon) {
-    return Card(
-      margin: EdgeInsets.all(10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0),
-            child: icon,
-          ),
-          Text(
-            name,
-            style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-          ),
-          IconButton(
-            padding: EdgeInsets.only(bottom: 10),
-            icon: Icon(
-              Icons.arrow_right,
-              size: 50,
+          Container(
+            child: Column(
+              children: [
+                Obx(
+                  () => AvatarGlow(
+                    endRadius: 110,
+                    glowColor: Colors.black,
+                    duration: Duration(seconds: 2),
+                    child: Container(
+                      margin: EdgeInsets.all(15),
+                      width: 175,
+                      height: 175,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(200),
+                        child: authC.user.value.photoUrl! == "noimage"
+                            ? Image.asset(
+                                "assets/images/noimage.png",
+                                fit: BoxFit.cover,
+                              )
+                            : Image.network(
+                                authC.user.value.photoUrl!,
+                                fit: BoxFit.cover,
+                              ),
+                      ),
+                    ),
+                  ),
+                ),
+                Obx(
+                  () => Text(
+                    "${authC.user.value.name!}",
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                Text(
+                  "${authC.user.value.email!}",
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
             ),
-            onPressed: function,
+          ),
+          SizedBox(height: 20),
+          Expanded(
+            child: Container(
+              child: Column(
+                children: [
+                  ListTile(
+                    onTap: () => Get.toNamed(Routes.UPDATE_STATUS_VIEW),
+                    leading: Icon(Icons.note_add_outlined),
+                    title: Text(
+                      "Update Status",
+                      style: TextStyle(
+                        fontSize: 22,
+                      ),
+                    ),
+                    trailing: Icon(Icons.arrow_right),
+                  ),
+                  ListTile(
+                    onTap: () => Get.toNamed(Routes.CHANGE_PROFILE_VIEW),
+                    leading: Icon(Icons.person),
+                    title: Text(
+                      "Change Profile",
+                      style: TextStyle(
+                        fontSize: 22,
+                      ),
+                    ),
+                    trailing: Icon(Icons.arrow_right),
+                  ),
+                  ListTile(
+                    onTap: () {},
+                    leading: Icon(Icons.color_lens),
+                    title: Text(
+                      "Change Theme",
+                      style: TextStyle(
+                        fontSize: 22,
+                      ),
+                    ),
+                    trailing: Text(Get.isDarkMode ? "Dark" : "Light"),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Container(
+            margin:
+                EdgeInsets.only(bottom: context.mediaQueryPadding.bottom + 10),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Chat App",
+                  style: TextStyle(
+                    color: Get.isDarkMode ? Colors.white54 : Colors.black54,
+                  ),
+                ),
+                Text(
+                  "v.1.0",
+                  style: TextStyle(
+                    color: Get.isDarkMode ? Colors.white54 : Colors.black54,
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
