@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_app/controller/auth_controller.dart';
 import 'package:get/get.dart';
 import 'package:flutter_chat_app/modules/update_status/update_status_controller.dart';
 
 class UpdateStatusView extends StatelessWidget {
-  const UpdateStatusView({Key? key}) : super(key: key);
+  final UpdateStatusController _controller = Get.put(UpdateStatusController());
+
+  final authCtrl = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
+    _controller.statusCtrl.text = authCtrl.user.value.status!;
     var deviceSize = MediaQuery.of(context).size;
-    final UpdateStatusController _controller =
-        Get.put(UpdateStatusController());
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -17,9 +19,7 @@ class UpdateStatusView extends StatelessWidget {
             Icons.arrow_back,
             color: Colors.blue,
           ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          onPressed: () => Get.back(),
         ),
         backgroundColor: Colors.white,
         title: Text(
@@ -36,6 +36,10 @@ class UpdateStatusView extends StatelessWidget {
             children: [
               TextField(
                 controller: _controller.statusCtrl,
+                textInputAction: TextInputAction.done,
+                onEditingComplete: () {
+                  authCtrl.updateStatus(_controller.statusCtrl.text);
+                },
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20.0),
@@ -52,7 +56,9 @@ class UpdateStatusView extends StatelessWidget {
                   ),
                 ),
                 child: Text('UPDATE'),
-                onPressed: () {},
+                onPressed: () {
+                  authCtrl.updateStatus(_controller.statusCtrl.text);
+                },
               ),
             ],
           ),

@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 
 class ProfileView extends StatelessWidget {
-  final authC = Get.find<AuthController>();
+  final authCtrl = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class ProfileView extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () => authC.logout(),
+            onPressed: () => authCtrl.logout(),
             icon: Icon(
               Icons.logout,
               color: Colors.black,
@@ -46,13 +46,13 @@ class ProfileView extends StatelessWidget {
                       height: 175,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(200),
-                        child: authC.user.value.photoUrl! == "noimage"
+                        child: authCtrl.user.value.photoUrl! == "noimage"
                             ? Image.asset(
                                 "assets/images/noimage.png",
                                 fit: BoxFit.cover,
                               )
                             : Image.network(
-                                authC.user.value.photoUrl!,
+                                authCtrl.user.value.photoUrl!,
                                 fit: BoxFit.cover,
                               ),
                       ),
@@ -61,7 +61,7 @@ class ProfileView extends StatelessWidget {
                 ),
                 Obx(
                   () => Text(
-                    "${authC.user.value.name!}",
+                    "${authCtrl.user.value.name!}",
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -70,7 +70,7 @@ class ProfileView extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "${authC.user.value.email!}",
+                  "${authCtrl.user.value.email!}",
                   style: TextStyle(
                     fontSize: 20,
                   ),

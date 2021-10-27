@@ -11,7 +11,7 @@ class ChangeProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     _controller.emailCtrl.text = authCtrl.user.value.email!;
     _controller.nameCtrl.text = authCtrl.user.value.name!;
-    _controller.statusCtrl.text = authCtrl.user.value.status ?? '';
+    _controller.statusCtrl.text = authCtrl.user.value.status!;
     var deviceSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -46,7 +46,20 @@ class ChangeProfileView extends StatelessWidget {
               CircleAvatar(
                 backgroundColor: Colors.grey,
                 radius: deviceSize.height / 15,
-                child: Image.asset("assets/images/noimage.png"),
+                child: Obx(
+                  () => ClipRRect(
+                    borderRadius: BorderRadius.circular(200),
+                    child: authCtrl.user.value.photoUrl! == "noimage"
+                        ? Image.asset(
+                            "assets/images/noimage.png",
+                            fit: BoxFit.cover,
+                          )
+                        : Image.network(
+                            authCtrl.user.value.photoUrl!,
+                            fit: BoxFit.cover,
+                          ),
+                  ),
+                ),
               ),
               SizedBox(height: deviceSize.height / 25),
               TextField(
@@ -143,7 +156,12 @@ class ChangeProfileView extends StatelessWidget {
                     borderRadius: BorderRadius.circular(50.0),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  authCtrl.changeProfile(
+                    _controller.nameCtrl.text,
+                    _controller.statusCtrl.text,
+                  );
+                },
               ),
             ],
           ),

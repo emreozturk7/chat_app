@@ -32,7 +32,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.UPDATE_STATUS_VIEW,
-      page: () => const UpdateStatusView(),
+      page: () => UpdateStatusView(),
     ),
     GetPage(
       name: _Paths.CHANGE_PROFILE_VIEW,
