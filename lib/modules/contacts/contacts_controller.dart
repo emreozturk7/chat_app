@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -13,22 +13,21 @@ class ContactsController extends GetxController {
   void searchContacts(String data, String email) async {
     print('SEARCH : $data');
 
-    if (data.length == 0) {
+    if (data.isEmpty) {
       query.value = [];
       tempSearch.value = [];
     } else {
       var capitalized = data.substring(0, 1).toUpperCase() + data.substring(1);
       print(capitalized);
 
-      if (query.length == 0 && data.length == 1) {
+      if (query.isEmpty && data.length == 1) {
         CollectionReference users = await firestore.collection('users');
         final keyNameResult = await users
-            .where('keyname', isEqualTo: data.substring(0, 1).toUpperCase())
-            .where('email', isEqualTo: email)
+            .where('keyName', isEqualTo: data.substring(0, 1).toUpperCase())
             .get();
 
         print('TOTAL DATA : ${keyNameResult.docs.length}');
-        if (keyNameResult.docs.length > 0) {
+        if (keyNameResult.docs.isNotEmpty) {
           for (int i = 0; i < keyNameResult.docs.length; i++) {
             query.add(keyNameResult.docs[i].data() as Map<String, dynamic>);
           }
@@ -38,13 +37,13 @@ class ContactsController extends GetxController {
           print('NO DATA');
         }
       }
-      if (query.length != 0) {
+      if (query.isNotEmpty) {
         tempSearch.value = [];
-        query.forEach((element) {
+        for (var element in query) {
           if (element['name'].startsWith(capitalized)) {
             tempSearch.add(element);
           }
-        });
+        }
       }
     }
     query.refresh();
