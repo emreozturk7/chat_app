@@ -23,7 +23,7 @@ class Main extends StatelessWidget {
         Duration(seconds: 0),
       ),
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {Pro
+        if (snapshot.connectionState == ConnectionState.done) {
           return Obx(
             () => GetMaterialApp(
               title: 'Chat App',
