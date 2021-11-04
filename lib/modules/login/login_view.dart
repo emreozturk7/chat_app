@@ -15,6 +15,34 @@ class LoginView extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: TextFormField(
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Username',
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: TextFormField(
+                obscureText: true,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Password',
+                ),
+              ),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(100.0),
+                ),
+              ),
+              child: const Text('Sıgn In'),
+              onPressed: () => authCtrl.login(),
+            ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(

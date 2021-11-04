@@ -20,10 +20,10 @@ class Main extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: Future.delayed(
-        Duration(seconds: 3),
+        Duration(seconds: 0),
       ),
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
+        if (snapshot.connectionState == ConnectionState.done) {Pro
           return Obx(
             () => GetMaterialApp(
               title: 'Chat App',

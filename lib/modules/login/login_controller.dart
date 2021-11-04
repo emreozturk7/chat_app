@@ -1,6 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
+  TextEditingController emailCtrl = TextEditingController();
+  TextEditingController passwordCtrl = TextEditingController();
   final count = 0.obs;
 
   @override
