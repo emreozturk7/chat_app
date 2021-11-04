@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/controller/auth_controller.dart';
 import 'package:flutter_chat_app/routes/app_pages.dart';
 import 'package:flutter_chat_app/utils/splash_screen.dart';
@@ -20,7 +20,7 @@ class Main extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: Future.delayed(
-        Duration(seconds: 0),
+        Duration(seconds: 3),
       ),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {

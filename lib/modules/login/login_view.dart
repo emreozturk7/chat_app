@@ -40,7 +40,7 @@ class LoginView extends StatelessWidget {
                   borderRadius: BorderRadius.circular(100.0),
                 ),
               ),
-              child: const Text('Sıgn In'),
+              child: const Text('Sign In'),
               onPressed: () => authCtrl.login(),
             ),
             ElevatedButton(
