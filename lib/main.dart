@@ -31,7 +31,7 @@ class Main extends StatelessWidget {
                   ? authCtrl.isAuth.isTrue
                       ? Routes.HOME_VIEW
                       : Routes.LOGIN_VIEW
-                  : Routes.INTRODUCTION_VIEW,
+                  : Routes.LOGIN_VIEW,
               getPages: AppPages.routes,
             ),
           );
