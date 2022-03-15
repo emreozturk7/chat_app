@@ -12,12 +12,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.2
-
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-
   firebase_core: ^1.8.0
   firebase_auth: ^3.1.4
   firebase_storage: ^10.0.6
@@ -30,10 +24,16 @@ dev_dependencies:
   get_storage: ^2.0.3
   introduction_screen: ^2.1.0
   avatar_glow: ^2.0.1
-
   image_picker: ^0.8.4+2
   video_player: ^2.2.5
   emoji_picker_flutter: ^1.0.7
+
+  cupertino_icons: ^1.0.2
+  platform: ^3.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
 
   flutter_lints: ^1.0.0
 
