@@ -11,6 +11,7 @@ abstract class Routes {
   static const CHANGE_PROFILE_VIEW = _Paths.CHANGE_PROFILE_VIEW;
   static const LOGIN_VIEW = _Paths.LOGIN_VIEW;
   static const INTRODUCTION_VIEW = _Paths.INTRODUCTION_VIEW;
+  static const TRACKING_VIEW = _Paths.TRACKING_VIEW;
 }
 
 abstract class _Paths {
@@ -22,4 +23,5 @@ abstract class _Paths {
   static const CHANGE_PROFILE_VIEW = '/change_profile_view';
   static const LOGIN_VIEW = '/login_view';
   static const INTRODUCTION_VIEW = '/introduction_view';
+  static const TRACKING_VIEW = '/tracking_view';
 }

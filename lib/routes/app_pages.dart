@@ -4,6 +4,7 @@ import 'package:flutter_chat_app/modules/introduction/introduction_view.dart';
 import 'package:flutter_chat_app/modules/login/login_view.dart';
 import 'package:flutter_chat_app/modules/message/message_view.dart';
 import 'package:flutter_chat_app/modules/profile/profile_view.dart';
+import 'package:flutter_chat_app/modules/tracking/tracking_view.dart';
 import 'package:flutter_chat_app/modules/update_status/update_status_view.dart';
 import 'package:flutter_chat_app/modules/home/home_view.dart';
 import 'package:get/get.dart';
@@ -45,6 +46,10 @@ class AppPages {
     GetPage(
       name: _Paths.INTRODUCTION_VIEW,
       page: () => IntroductionView(),
+    ),
+    GetPage(
+      name: _Paths.TRACKING_VIEW,
+      page: () => TrackingView(),
     ),
   ];
 }
