@@ -26,12 +26,13 @@ class Main extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.done) {
           return Obx(
             () => GetMaterialApp(
+              debugShowCheckedModeBanner: false,
               title: 'Chat App',
               initialRoute: authCtrl.isSkipIntro.isTrue
                   ? authCtrl.isAuth.isTrue
                       ? Routes.HOME_VIEW
                       : Routes.LOGIN_VIEW
-                  : Routes.LOGIN_VIEW,
+                  : Routes.INTRODUCTION_VIEW,
               getPages: AppPages.routes,
             ),
           );

@@ -10,9 +10,9 @@ class SplashScreen extends StatelessWidget {
       home: Scaffold(
         body: Center(
           child: SizedBox(
-            width: 350,
-            height: 350,
-            child: Lottie.asset("assets/lottie/chat.json"),
+            width: 1000,
+            height: 1000,
+            child: Lottie.asset("assets/lottie/tracking.json"),
           ),
         ),
       ),

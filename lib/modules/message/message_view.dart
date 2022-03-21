@@ -4,6 +4,7 @@ import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/controller/auth_controller.dart';
 import 'package:flutter_chat_app/modules/message/message_controller.dart';
+import 'package:flutter_chat_app/modules/tracking/tracking_view.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -15,6 +16,19 @@ class MessageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => TrackingView(),
+                ),
+              );
+            },
+            icon: Icon(Icons.add),
+          ),
+        ],
         backgroundColor: Colors.red[900],
         leadingWidth: 100,
         leading: InkWell(

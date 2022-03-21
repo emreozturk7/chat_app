@@ -18,6 +18,9 @@ dependencies:
   cloud_firestore: ^2.5.4
   google_sign_in: ^5.2.1
 
+  location: ^4.3.0
+  google_maps_flutter: ^2.1.2
+
   flutter_native_splash: ^1.2.4
   lottie: ^1.2.1
   get: ^4.3.8
