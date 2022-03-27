@@ -13,9 +13,9 @@ class IntroductionView extends StatelessWidget {
       body: IntroductionScreen(
         pages: [
           PageViewModel(
-            title: 'Deneme1',
-            body: 'DENEME1',
-            image: Container(
+            title: 'Arkadaş takip',
+            body: 'Sayfa 1',
+            image: SizedBox(
               width: Get.width * 0.6,
               height: Get.height * 0.6,
               child: Center(
@@ -24,9 +24,9 @@ class IntroductionView extends StatelessWidget {
             ),
           ),
           PageViewModel(
-            title: 'Deneme2',
-            body: 'DENEME2',
-            image: Container(
+            title: 'Arkadaş takip',
+            body: 'Sayfa 2',
+            image: SizedBox(
               width: Get.width * 0.6,
               height: Get.height * 0.6,
               child: Center(
@@ -35,9 +35,9 @@ class IntroductionView extends StatelessWidget {
             ),
           ),
           PageViewModel(
-            title: 'Deneme3',
-            body: 'DENEME3',
-            image: Container(
+            title: 'Arkadaş takip',
+            body: 'Sayfa 3',
+            image: SizedBox(
               width: Get.width * 0.6,
               height: Get.height * 0.6,
               child: Center(
@@ -46,9 +46,9 @@ class IntroductionView extends StatelessWidget {
             ),
           ),
           PageViewModel(
-            title: 'Deneme4',
-            body: 'DENEME4',
-            image: Container(
+            title: 'Arkadaş takip',
+            body: 'Sayfa 4',
+            image: SizedBox(
               width: Get.width * 0.6,
               height: Get.height * 0.6,
               child: Center(
@@ -59,15 +59,15 @@ class IntroductionView extends StatelessWidget {
         ],
         onDone: () => Get.offAllNamed(Routes.LOGIN_VIEW),
         showSkipButton: true,
-        skip: Text('Skip'),
+        skip: Text('Atla'),
         next: Text(
-          'Next',
+          'İleri',
           style: TextStyle(
             fontWeight: FontWeight.bold,
           ),
         ),
         done: Text(
-          'Login',
+          'Giriş',
           style: TextStyle(fontWeight: FontWeight.w600),
         ),
       ),

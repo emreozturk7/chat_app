@@ -27,12 +27,9 @@ class Main extends StatelessWidget {
           return Obx(
             () => GetMaterialApp(
               debugShowCheckedModeBanner: false,
-              title: 'Chat App',
-              initialRoute: authCtrl.isSkipIntro.isTrue
-                  ? authCtrl.isAuth.isTrue
-                      ? Routes.HOME_VIEW
-                      : Routes.LOGIN_VIEW
-                  : Routes.INTRODUCTION_VIEW,
+              title: 'Arkadaş Takip',
+              initialRoute:
+                  authCtrl.isAuth.isTrue ? Routes.HOME_VIEW : Routes.LOGIN_VIEW,
               getPages: AppPages.routes,
             ),
           );

@@ -30,7 +30,7 @@ class HomeView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Chats",
+                    "Konuşmalar",
                     style: TextStyle(
                       fontSize: 35,
                       fontWeight: FontWeight.bold,

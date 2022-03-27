@@ -23,7 +23,7 @@ class UpdateStatusView extends StatelessWidget {
         ),
         backgroundColor: Colors.white,
         title: Text(
-          'Update Status',
+          'Durum güncelle',
           style: TextStyle(color: Colors.blue),
         ),
         centerTitle: true,
@@ -55,7 +55,7 @@ class UpdateStatusView extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                 ),
-                child: Text('UPDATE'),
+                child: Text('GÜNCELLE'),
                 onPressed: () {
                   authCtrl.updateStatus(_controller.statusCtrl.text);
                 },

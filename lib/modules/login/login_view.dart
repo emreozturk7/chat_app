@@ -15,7 +15,7 @@ class LoginView extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.white,
         title: Text(
-          'Google View',
+          'Giriş Yap',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.black,
@@ -36,7 +36,7 @@ class LoginView extends StatelessWidget {
                 ),
               ),
               child: const Text(
-                'GOOGLE SIGN IN',
+                'Google ile giriş yap',
                 style: TextStyle(
                   fontSize: 15,
                 ),
