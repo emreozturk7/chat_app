@@ -44,9 +44,9 @@ class Chat {
       );
 
   Map<String, dynamic> toJson() => {
-        "pengirim": sender,
-        "penerima": receiver,
-        "pesan": message,
+        "sender": sender,
+        "receiver": receiver,
+        "message": message,
         "time": time,
         "isRead": isRead,
       };

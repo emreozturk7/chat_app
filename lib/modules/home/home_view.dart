@@ -27,29 +27,13 @@ class HomeView extends StatelessWidget {
               ),
               padding: EdgeInsets.fromLTRB(20, 30, 20, 20),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
                   Text(
                     "Konuşmalar",
                     style: TextStyle(
                       fontSize: 35,
                       fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Material(
-                    borderRadius: BorderRadius.circular(50),
-                    color: Colors.red[900],
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(50),
-                      onTap: () => Get.toNamed(Routes.PROFILE_VIEW),
-                      child: Padding(
-                        padding: const EdgeInsets.all(5),
-                        child: Icon(
-                          Icons.person,
-                          size: 35,
-                          color: Colors.white,
-                        ),
-                      ),
                     ),
                   ),
                 ],
@@ -81,7 +65,7 @@ class HomeView extends StatelessWidget {
                                       vertical: 5,
                                     ),
                                     onTap: () => _controller.goToMessage(
-                                      "${listDocsChats[index].id}",
+                                      listDocsChats[index].id,
                                       authC.user.value.email!,
                                       listDocsChats[index]["connection"],
                                     ),
@@ -118,7 +102,8 @@ class HomeView extends StatelessWidget {
                                             label: Text(
                                               "${listDocsChats[index]["total_unread"]}",
                                               style: TextStyle(
-                                                  color: Colors.white),
+                                                color: Colors.white,
+                                              ),
                                             ),
                                           ),
                                   )
@@ -128,7 +113,7 @@ class HomeView extends StatelessWidget {
                                       vertical: 5,
                                     ),
                                     onTap: () => _controller.goToMessage(
-                                      "${listDocsChats[index].id}",
+                                      listDocsChats[index].id,
                                       authC.user.value.email!,
                                       listDocsChats[index]["connection"],
                                     ),
@@ -156,13 +141,6 @@ class HomeView extends StatelessWidget {
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
-                                    subtitle: Text(
-                                      "${data["status"]}",
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
                                     trailing: listDocsChats[index]
                                                 ["total_unread"] ==
                                             0
@@ -172,7 +150,8 @@ class HomeView extends StatelessWidget {
                                             label: Text(
                                               "${listDocsChats[index]["total_unread"]}",
                                               style: TextStyle(
-                                                  color: Colors.white),
+                                                color: Colors.white,
+                                              ),
                                             ),
                                           ),
                                   );

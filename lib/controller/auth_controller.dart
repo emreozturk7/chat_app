@@ -143,7 +143,6 @@ class AuthController extends GetxController {
             'keyName': _currentUser!.displayName!.substring(0, 1).toUpperCase(),
             'email': _currentUser!.email,
             'photoUrl': _currentUser!.photoUrl ?? 'noimage',
-            'status': '',
             'creationTime':
                 userCredential!.user!.metadata.creationTime!.toIso8601String(),
             'lastSignInTime': userCredential!.user!.metadata.lastSignInTime!
@@ -204,78 +203,6 @@ class AuthController extends GetxController {
     await _googleSignIn.disconnect();
     await _googleSignIn.signOut();
     Get.offAllNamed(Routes.LOGIN_VIEW);
-  }
-
-  void changeProfile(String name, String status) {
-    String date = DateTime.now().toIso8601String();
-
-    CollectionReference users = firestore.collection('users');
-
-    users.doc(_currentUser!.email).update({
-      'name': name,
-      'keyName': name.substring(0, 1).toUpperCase(),
-      'status': status,
-      'lastSignInTime':
-          userCredential!.user!.metadata.lastSignInTime!.toIso8601String(),
-      'updatedTime': date,
-    });
-
-    user.update((user) {
-      user!.name = name;
-      user.keyName = name.substring(0, 1).toUpperCase();
-      user.status = status;
-      user.lastSignInTime =
-          userCredential!.user!.metadata.lastSignInTime!.toIso8601String();
-      user.updatedTime = date;
-    });
-
-    user.refresh();
-
-    Get.defaultDialog(title: 'Success', middleText: 'Change Profile Success');
-  }
-
-  void updateStatus(String status) {
-    String date = DateTime.now().toIso8601String();
-
-    CollectionReference users = firestore.collection('users');
-
-    users.doc(_currentUser!.email).update({
-      'status': status,
-      'lastSignInTime':
-          userCredential!.user!.metadata.lastSignInTime!.toIso8601String(),
-      'updatedTime': date,
-    });
-
-    user.update((user) {
-      user!.status = status;
-      user.lastSignInTime =
-          userCredential!.user!.metadata.lastSignInTime!.toIso8601String();
-      user.updatedTime = date;
-    });
-
-    user.refresh();
-
-    Get.defaultDialog(title: 'Success', middleText: 'Update Status Success');
-  }
-
-  void updatePhotoUrl(String url) async {
-    String date = DateTime.now().toIso8601String();
-
-    CollectionReference users = firestore.collection('users');
-
-    await users.doc(_currentUser!.email).update({
-      'photoUrl': url,
-      'updatedTime': date,
-    });
-
-    user.update((user) {
-      user!.photoUrl = url;
-      user.updatedTime = date;
-    });
-
-    user.refresh();
-    Get.defaultDialog(
-        title: 'Success', middleText: 'Change Photo Profile Success');
   }
 
   void addNewConnection(String friendEmail) async {

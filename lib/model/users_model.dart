@@ -14,7 +14,6 @@ class UsersModel {
     this.creationTime,
     this.lastSignInTime,
     this.photoUrl,
-    this.status,
     this.updatedTime,
     this.chats,
   });
@@ -25,7 +24,6 @@ class UsersModel {
   String? creationTime;
   String? lastSignInTime;
   String? photoUrl;
-  String? status;
   String? updatedTime;
   List<ChatUser>? chats;
 
@@ -37,7 +35,6 @@ class UsersModel {
         creationTime: json["creationTime"],
         lastSignInTime: json["lastSignInTime"],
         photoUrl: json["photoUrl"],
-        status: json["status"],
         updatedTime: json["updatedTime"],
       );
   Map<String, dynamic> toJson() => {
@@ -48,7 +45,6 @@ class UsersModel {
         "creationTime": creationTime,
         "lastSignInTime": lastSignInTime,
         "photoUrl": photoUrl,
-        "status": status,
         "updatedTime": updatedTime,
       };
 }
