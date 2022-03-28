@@ -30,7 +30,7 @@ class HomeView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
                   Text(
-                    "Konuşmalar",
+                    'Görüşmeler',
                     style: TextStyle(
                       fontSize: 35,
                       fontWeight: FontWeight.bold,
@@ -173,9 +173,9 @@ class HomeView extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Get.toNamed(Routes.CONTACTS_VIEW),
+        onPressed: () => Get.toNamed(Routes.DATE_VIEW),
         child: Icon(
-          Icons.search,
+          Icons.add,
           size: 30,
           color: Colors.white,
         ),

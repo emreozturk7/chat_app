@@ -11,7 +11,8 @@ import 'package:intl/intl.dart';
 class MessageView extends StatelessWidget {
   final authC = Get.find<AuthController>();
   final MessageController _controller = Get.put(MessageController());
-  final String chat_id = (Get.arguments as Map<String, dynamic>)["chat_id"];
+  final String chatID = (Get.arguments as Map<String, dynamic>)["chat_id"];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,7 +95,7 @@ class MessageView extends StatelessWidget {
               var dataFriend =
                   snapFriendUser.data!.data() as Map<String, dynamic>;
               return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
                     dataFriend["name"],
@@ -104,31 +105,17 @@ class MessageView extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ),
-                  Text(
-                    dataFriend["status"],
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.white,
-                    ),
-                  ),
                 ],
               );
             }
-
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children: const [
                 Text(
                   'Loading...',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
-                  ),
-                ),
-                Text(
-                  'Loading...',
-                  style: TextStyle(
-                    fontSize: 14,
                   ),
                 ),
               ],
@@ -149,79 +136,77 @@ class MessageView extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              child: Container(
-                child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                  stream: _controller.streamChats(chat_id),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.active) {
-                      var alldata = snapshot.data!.docs;
-                      Timer(
-                        Duration.zero,
-                        () => _controller.scroolCtrl.jumpTo(
-                            _controller.scroolCtrl.position.maxScrollExtent),
-                      );
-                      return ListView.builder(
-                        controller: _controller.scroolCtrl,
-                        itemCount: alldata.length,
-                        itemBuilder: (context, index) {
-                          if (index == 0) {
+              child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                stream: _controller.streamChats(chatID),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.active) {
+                    var allData = snapshot.data!.docs;
+                    Timer(
+                      Duration.zero,
+                      () => _controller.scroolCtrl.jumpTo(
+                          _controller.scroolCtrl.position.maxScrollExtent),
+                    );
+                    return ListView.builder(
+                      controller: _controller.scroolCtrl,
+                      itemCount: allData.length,
+                      itemBuilder: (context, index) {
+                        if (index == 0) {
+                          return Column(
+                            children: [
+                              SizedBox(height: 10),
+                              Text(
+                                "${allData[index]["groupTime"]}",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              ItemChat(
+                                message: "${allData[index]["message"]}",
+                                isSender: allData[index]["sender"] ==
+                                        authC.user.value.email!
+                                    ? true
+                                    : false,
+                                time: "${allData[index]["time"]}",
+                              ),
+                            ],
+                          );
+                        } else {
+                          if (allData[index]["groupTime"] ==
+                              allData[index - 1]["groupTime"]) {
+                            return ItemChat(
+                              message: "${allData[index]["message"]}",
+                              isSender: allData[index]["sender"] ==
+                                      authC.user.value.email!
+                                  ? true
+                                  : false,
+                              time: "${allData[index]["time"]}",
+                            );
+                          } else {
                             return Column(
                               children: [
-                                SizedBox(height: 10),
                                 Text(
-                                  "${alldata[index]["groupTime"]}",
+                                  "${allData[index]["groupTime"]}",
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 ItemChat(
-                                  message: "${alldata[index]["message"]}",
-                                  isSender: alldata[index]["sender"] ==
+                                  message: "${allData[index]["message"]}",
+                                  isSender: allData[index]["sender"] ==
                                           authC.user.value.email!
                                       ? true
                                       : false,
-                                  time: "${alldata[index]["time"]}",
+                                  time: "${allData[index]["time"]}",
                                 ),
                               ],
                             );
-                          } else {
-                            if (alldata[index]["groupTime"] ==
-                                alldata[index - 1]["groupTime"]) {
-                              return ItemChat(
-                                message: "${alldata[index]["message"]}",
-                                isSender: alldata[index]["sender"] ==
-                                        authC.user.value.email!
-                                    ? true
-                                    : false,
-                                time: "${alldata[index]["time"]}",
-                              );
-                            } else {
-                              return Column(
-                                children: [
-                                  Text(
-                                    "${alldata[index]["groupTime"]}",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  ItemChat(
-                                    message: "${alldata[index]["message"]}",
-                                    isSender: alldata[index]["sender"] ==
-                                            authC.user.value.email!
-                                        ? true
-                                        : false,
-                                    time: "${alldata[index]["time"]}",
-                                  ),
-                                ],
-                              );
-                            }
                           }
-                        },
-                      );
-                    }
-                    return Center(child: CircularProgressIndicator());
-                  },
-                ),
+                        }
+                      },
+                    );
+                  }
+                  return Center(child: CircularProgressIndicator());
+                },
               ),
             ),
             Container(
@@ -236,27 +221,25 @@ class MessageView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-                    child: Container(
-                      child: TextField(
-                        autocorrect: false,
-                        controller: _controller.chatCtrl,
-                        focusNode: _controller.focusNode,
-                        onEditingComplete: () => _controller.newChat(
-                          authC.user.value.email!,
-                          Get.arguments as Map<String, dynamic>,
-                          _controller.chatCtrl.text,
+                    child: TextField(
+                      autocorrect: false,
+                      controller: _controller.chatCtrl,
+                      focusNode: _controller.focusNode,
+                      onEditingComplete: () => _controller.newChat(
+                        authC.user.value.email!,
+                        Get.arguments as Map<String, dynamic>,
+                        _controller.chatCtrl.text,
+                      ),
+                      decoration: InputDecoration(
+                        prefixIcon: IconButton(
+                          onPressed: () {
+                            _controller.focusNode.unfocus();
+                            _controller.isShowEmoji.toggle();
+                          },
+                          icon: Icon(Icons.emoji_emotions_outlined),
                         ),
-                        decoration: InputDecoration(
-                          prefixIcon: IconButton(
-                            onPressed: () {
-                              _controller.focusNode.unfocus();
-                              _controller.isShowEmoji.toggle();
-                            },
-                            icon: Icon(Icons.emoji_emotions_outlined),
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(100),
-                          ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(100),
                         ),
                       ),
                     ),
@@ -286,7 +269,7 @@ class MessageView extends StatelessWidget {
             ),
             Obx(
               () => (_controller.isShowEmoji.isTrue)
-                  ? Container(
+                  ? SizedBox(
                       height: 325,
                       child: EmojiPicker(
                         onEmojiSelected: (category, emoji) {
@@ -309,9 +292,11 @@ class MessageView extends StatelessWidget {
                           progressIndicatorColor: Color(0xFFB71C1C),
                           showRecentsTab: true,
                           recentsLimit: 28,
-                          noRecentsText: "No Recents",
+                          noRecentsText: "No Recent",
                           noRecentsStyle: const TextStyle(
-                              fontSize: 20, color: Colors.black26),
+                            fontSize: 20,
+                            color: Colors.black26,
+                          ),
                           categoryIcons: const CategoryIcons(),
                           buttonMode: ButtonMode.MATERIAL,
                         ),
@@ -366,7 +351,7 @@ class ItemChat extends StatelessWidget {
             ),
             padding: EdgeInsets.all(15),
             child: Text(
-              "$message",
+              message,
               style: TextStyle(
                 color: Colors.white,
               ),

@@ -1,4 +1,5 @@
 import 'package:flutter_chat_app/modules/contacts/contacts_view.dart';
+import 'package:flutter_chat_app/modules/date/date_view.dart';
 import 'package:flutter_chat_app/modules/login/login_view.dart';
 import 'package:flutter_chat_app/modules/message/message_view.dart';
 import 'package:flutter_chat_app/modules/tracking/tracking_view.dart';
@@ -30,6 +31,10 @@ class AppPages {
     GetPage(
       name: _Paths.TRACKING_VIEW,
       page: () => TrackingView(),
+    ),
+    GetPage(
+      name: _Paths.DATE_VIEW,
+      page: () => DateView(),
     ),
   ];
 }

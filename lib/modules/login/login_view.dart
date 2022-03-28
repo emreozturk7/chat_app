@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/controller/auth_controller.dart';
-import 'package:flutter_chat_app/modules/login/login_controller.dart';
 import 'package:get/get.dart';
 
 class LoginView extends StatelessWidget {
-  final LoginController _controller = Get.put(LoginController());
   final authCtrl = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
-    var deviceSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
