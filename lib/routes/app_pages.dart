@@ -4,6 +4,7 @@ import 'package:flutter_chat_app/modules/login/login_view.dart';
 import 'package:flutter_chat_app/modules/message/message_view.dart';
 import 'package:flutter_chat_app/modules/tracking/tracking_view.dart';
 import 'package:flutter_chat_app/modules/home/home_view.dart';
+import 'package:flutter_chat_app/utils/loading_screen.dart';
 import 'package:get/get.dart';
 
 part 'app_routes.dart';
@@ -35,6 +36,10 @@ class AppPages {
     GetPage(
       name: _Paths.DATE_VIEW,
       page: () => DateView(),
+    ),
+    GetPage(
+      name: _Paths.LOADING_VIEW,
+      page: () => LoadingScreen(),
     ),
   ];
 }
