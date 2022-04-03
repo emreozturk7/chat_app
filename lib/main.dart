@@ -28,8 +28,9 @@ class Main extends StatelessWidget {
             () => GetMaterialApp(
               debugShowCheckedModeBanner: false,
               title: 'Arkadaş Takip',
-              initialRoute:
-                  authCtrl.isAuth.isTrue ? Routes.HOME_VIEW : Routes.LOGIN_VIEW,
+              initialRoute: authCtrl.isAuth.isTrue
+                  ? Routes.LOGIN_VIEW
+                  : Routes.LOGIN_VIEW,
               getPages: AppPages.routes,
             ),
           );

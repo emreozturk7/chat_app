@@ -60,5 +60,7 @@
 	<string>To choose an avatar</string>
 	<key>NSCameraUsageDescription</key>
 	<string>To take an avatar photo</string>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
 </dict>
 </plist>

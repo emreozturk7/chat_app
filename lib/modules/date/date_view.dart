@@ -58,13 +58,6 @@ class DateView extends StatelessWidget {
                 ),
               ),
             ),
-            Column(
-              children: [
-                TextField(),
-                TextField(),
-                TextField(),
-              ],
-            ),
           ],
         ),
       ),

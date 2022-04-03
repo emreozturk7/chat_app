@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/controller/auth_controller.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
+import 'package:flutter_chat_app/core/context_extensions.dart';
 
 class LoginView extends StatelessWidget {
   final authCtrl = Get.find<AuthController>();
@@ -20,27 +22,53 @@ class LoginView extends StatelessWidget {
         ),
       ),
       body: Center(
-        child: ListView(
-          reverse: true,
-          shrinkWrap: true,
-          padding: EdgeInsets.all(32),
-          children: [
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                minimumSize: Size(200, 40),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(100.0),
+        child: Padding(
+          padding: context.paddingMedium,
+          child: Column(
+            children: [
+              Expanded(
+                flex: 14,
+                child: Center(
+                  child: SizedBox(
+                    child: Lottie.asset("assets/lottie/date.json"),
+                  ),
                 ),
               ),
-              child: const Text(
-                'Google ile giriş yap',
-                style: TextStyle(
-                  fontSize: 15,
+              Expanded(
+                flex: 1,
+                child: InkWell(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(context.mediumValue),
+                      border: Border.all(
+                        color: Colors.black,
+                        width: 0.5,
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          child: Image.asset('assets/images/googlesignin.png'),
+                        ),
+                        SizedBox(width: context.mediumValue),
+                        Text(
+                          'Google ile giriş yap',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  onTap: () => authCtrl.login(),
                 ),
               ),
-              onPressed: () => authCtrl.login(),
-            ),
-          ].reversed.toList(),
+              Spacer(
+                flex: 5,
+              ),
+            ],
+          ),
         ),
       ),
     );
