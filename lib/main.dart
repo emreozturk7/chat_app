@@ -20,7 +20,7 @@ class Main extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: Future.delayed(
-        Duration(seconds: 0),
+        Duration(seconds: 3),
       ),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
@@ -29,7 +29,7 @@ class Main extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'Arkadaş Takip',
               initialRoute:
-                  authCtrl.isAuth.isTrue ? Routes.DATE_VIEW : Routes.LOGIN_VIEW,
+                  authCtrl.isAuth.isTrue ? Routes.HOME_VIEW : Routes.LOGIN_VIEW,
               getPages: AppPages.routes,
             ),
           );

@@ -37,10 +37,12 @@ class _DateViewState extends State<DateView> {
         firstDate: DateTime(2015),
         lastDate: DateTime(2101));
     if (picked != null) {
-      setState(() {
-        selectedDate = picked;
-        _dateController.text = DateFormat.yMd().format(selectedDate);
-      });
+      setState(
+        () {
+          selectedDate = picked;
+          _dateController.text = DateFormat.yMd().format(selectedDate);
+        },
+      );
     }
   }
 
@@ -50,18 +52,22 @@ class _DateViewState extends State<DateView> {
       initialTime: selectedTime,
     );
     if (picked != null) {
-      setState(() {
-        selectedTime = picked;
-        _hour = selectedTime.hour.toString();
-        _minute = selectedTime.minute.toString();
-        _time = _hour! + ' : ' + _minute!;
-        _timeController.text = _time!;
-        _timeController.text = formatDate(
-            DateTime(2019, 08, 1, selectedTime.hour, selectedTime.minute),
-            [hh, ':', nn, " ", am]).toString();
-      });
+      setState(
+        () {
+          selectedTime = picked;
+          _hour = selectedTime.hour.toString();
+          _minute = selectedTime.minute.toString();
+          _time = _hour! + ' : ' + _minute!;
+          _timeController.text = _time!;
+          _timeController.text = formatDate(
+              DateTime(2019, 08, 1, selectedTime.hour, selectedTime.minute),
+              [hh, ':', nn, " ", am]).toString();
+        },
+      );
     }
   }
+
+  Future<void> _selectFriend(BuildContext context) async {}
 
   @override
   void initState() {
@@ -176,7 +182,7 @@ class _DateViewState extends State<DateView> {
             ),
             SizedBox(height: context.dynamicHeight(0.025)),
             Column(
-              children: <Widget>[
+              children: [
                 Text(
                   'Buluşma saatini seç',
                   style: TextStyle(
@@ -212,6 +218,78 @@ class _DateViewState extends State<DateView> {
                   ),
                 ),
               ],
+            ),
+            SizedBox(height: context.dynamicHeight(0.025)),
+            Column(
+              children: [
+                Text(
+                  'Buluşmak istediğin kişiyi seç',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(height: context.dynamicHeight(0.01)),
+                InkWell(
+                  onTap: () {
+                    Get.to(Routes.CONTACTS_VIEW);
+                  },
+                  child: Container(
+                    width: context.dynamicWidth(0.75),
+                    height: context.dynamicHeight(0.1),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(color: Colors.grey[200]),
+                    child: TextFormField(
+                      style: TextStyle(fontSize: 40),
+                      textAlign: TextAlign.center,
+                      onSaved: (val) {
+                        _setTime = val;
+                      },
+                      enabled: false,
+                      keyboardType: TextInputType.text,
+                      controller: _timeController,
+                      decoration: InputDecoration(
+                        disabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide.none,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: context.dynamicHeight(0.025)),
+            InkWell(
+              child: Container(
+                width: context.dynamicWidth(0.75),
+                height: context.dynamicHeight(0.075),
+                padding: context.paddingLow,
+                decoration: BoxDecoration(
+                  color: Colors.grey[200],
+                  borderRadius: BorderRadius.circular(context.mediumValue),
+                ),
+                child: Row(
+                  children: [
+                    Spacer(),
+                    Expanded(
+                      flex: 1,
+                      child: Icon(Icons.send),
+                    ),
+                    Spacer(),
+                    Expanded(
+                      flex: 12,
+                      child: Text(
+                        'Buluşma isteği gönder',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              onTap: () {},
             ),
           ],
         ),
