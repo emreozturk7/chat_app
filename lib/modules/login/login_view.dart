@@ -35,9 +35,10 @@ class LoginView extends StatelessWidget {
                 ),
               ),
               Expanded(
-                flex: 1,
+                flex: 2,
                 child: InkWell(
                   child: Container(
+                    padding: context.paddingLow,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(context.mediumValue),
                       border: Border.all(
