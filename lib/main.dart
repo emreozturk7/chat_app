@@ -29,7 +29,7 @@ class Main extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'Arkadaş Takip',
               initialRoute:
-                  authCtrl.isAuth.isTrue ? Routes.HOME_VIEW : Routes.LOGIN_VIEW,
+                  authCtrl.isAuth.isTrue ? Routes.DATE_VIEW : Routes.LOGIN_VIEW,
               getPages: AppPages.routes,
             ),
           );
