@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/controller/auth_controller.dart';
+import 'package:flutter_chat_app/core/context_extensions.dart';
 import 'package:flutter_chat_app/modules/contacts/contacts_controller.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -7,64 +8,94 @@ import 'package:lottie/lottie.dart';
 class ContactsView extends StatelessWidget {
   final ContactsController _controller = Get.put(ContactsController());
   final authCtrl = Get.find<AuthController>();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(140),
-        child: AppBar(
-          backgroundColor: Colors.blue,
-          title: const Text('Contacts'),
-          centerTitle: true,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () => Get.back(),
-          ),
-          flexibleSpace: Padding(
-            padding: const EdgeInsets.fromLTRB(30, 50, 30, 20),
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: TextField(
-                onChanged: (value) => _controller.searchContacts(
-                  value,
-                  authCtrl.user.value.email!,
-                ),
-                controller: _controller.searchCtrl,
-                decoration: InputDecoration(
-                  fillColor: Colors.white,
-                  filled: true,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(50),
-                    borderSide: const BorderSide(
-                      color: Colors.white,
-                      width: 1,
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30.0),
+      ),
+      elevation: 0.0,
+      backgroundColor: Colors.transparent,
+      child: dialogContent(context),
+    );
+  }
+
+  dialogContent(BuildContext context) {
+    return Obx(
+      () => _controller.tempSearch.isEmpty
+          ? Container(
+              width: context.dynamicWidth(0.6),
+              height: context.dynamicHeight(0.6),
+              padding: context.paddingLow,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(30.0),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black26,
+                    blurRadius: 10.0,
+                    offset: Offset(0.0, 10.0),
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: TextField(
+                      onChanged: (value) => _controller.searchContacts(
+                        value,
+                        authCtrl.user.value.email!,
+                      ),
+                      controller: _controller.searchCtrl,
+                      decoration: InputDecoration(
+                        fillColor: Colors.white,
+                        filled: true,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(50),
+                          borderSide: const BorderSide(
+                            color: Colors.white,
+                            width: 1,
+                          ),
+                        ),
+                        hintText: 'Search',
+                        contentPadding: context.paddingNormal,
+                        suffixIcon: IconButton(
+                          icon: const Icon(Icons.search),
+                          onPressed: () {},
+                        ),
+                      ),
                     ),
                   ),
-                  hintText: 'Search',
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 30,
-                    vertical: 20,
+                  Center(
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.3,
+                      height: MediaQuery.of(context).size.height * 0.3,
+                      child: Lottie.asset("assets/lottie/empty.json"),
+                    ),
                   ),
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.search),
-                    onPressed: () {},
-                  ),
-                ),
+                ],
               ),
-            ),
-          ),
-        ),
-      ),
-      body: Obx(
-        () => _controller.tempSearch.isEmpty
-            ? Center(
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.7,
-                  height: MediaQuery.of(context).size.height * 0.7,
-                  child: Lottie.asset("assets/lottie/empty.json"),
-                ),
-              )
-            : ListView.builder(
+            )
+          : Container(
+              width: context.dynamicWidth(0.6),
+              height: context.dynamicHeight(0.6),
+              padding: context.paddingLow,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(30.0),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black26,
+                    blurRadius: 10.0,
+                    offset: Offset(0.0, 10.0),
+                  ),
+                ],
+              ),
+              child: ListView.builder(
                 padding: EdgeInsets.zero,
                 itemCount: _controller.tempSearch.length,
                 itemBuilder: (context, index) => ListTile(
@@ -102,16 +133,20 @@ class ContactsView extends StatelessWidget {
                     ),
                   ),
                   trailing: GestureDetector(
-                    onTap: () => authCtrl.addNewConnection(
-                      _controller.tempSearch[index]['email'],
-                    ),
+                    onTap: () {
+                      String deger = _controller.tempSearch[index]['name'];
+                      Navigator.of(context, rootNavigator: true).pop(index);
+                      /* authCtrl.addNewConnection(
+                          _controller.tempSearch[index]['email'],
+                        ); */
+                    },
                     child: Chip(
-                      label: Text('Message'),
+                      label: Text('Ekle'),
                     ),
                   ),
                 ),
               ),
-      ),
+            ),
     );
   }
 }

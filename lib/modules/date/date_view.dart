@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/core/context_extensions.dart';
+import 'package:flutter_chat_app/modules/contacts/contacts_controller.dart';
+import 'package:flutter_chat_app/modules/contacts/contacts_view.dart';
 import 'package:flutter_chat_app/routes/app_pages.dart';
 import 'package:get/get.dart';
 import 'package:date_format/date_format.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 
 class DateView extends StatefulWidget {
@@ -13,6 +16,8 @@ class DateView extends StatefulWidget {
 }
 
 class _DateViewState extends State<DateView> {
+  final ContactsController _controller = Get.put(ContactsController());
+
   double? _height;
   double? _width;
 
@@ -232,7 +237,10 @@ class _DateViewState extends State<DateView> {
                 SizedBox(height: context.dynamicHeight(0.01)),
                 InkWell(
                   onTap: () {
-                    Get.to(Routes.CONTACTS_VIEW);
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) => ContactsView(),
+                    );
                   },
                   child: Container(
                     width: context.dynamicWidth(0.75),
@@ -242,12 +250,9 @@ class _DateViewState extends State<DateView> {
                     child: TextFormField(
                       style: TextStyle(fontSize: 40),
                       textAlign: TextAlign.center,
-                      onSaved: (val) {
-                        _setTime = val;
-                      },
                       enabled: false,
+                      controller: _controller.contactController,
                       keyboardType: TextInputType.text,
-                      controller: _timeController,
                       decoration: InputDecoration(
                         disabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide.none,
@@ -269,7 +274,7 @@ class _DateViewState extends State<DateView> {
                   borderRadius: BorderRadius.circular(context.mediumValue),
                 ),
                 child: Row(
-                  children: [
+                  children: const [
                     Spacer(),
                     Expanded(
                       flex: 1,

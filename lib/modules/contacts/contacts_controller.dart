@@ -8,6 +8,9 @@ class ContactsController extends GetxController {
   var query = [].obs;
   var tempSearch = [].obs;
 
+  TextEditingController contactController = TextEditingController()
+    ..text = 'deneme';
+
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   void searchContacts(String data, String email) async {
