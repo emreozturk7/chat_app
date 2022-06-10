@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/controller/auth_controller.dart';
 import 'package:flutter_chat_app/modules/home/home_controller.dart';
+import 'package:flutter_chat_app/modules/meets/meet_view.dart';
 import 'package:flutter_chat_app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
@@ -31,7 +32,9 @@ class HomeView extends StatelessWidget {
                   Expanded(
                     flex: 8,
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.to(MeetView());
+                      },
                       icon: Icon(Icons.ac_unit),
                     ),
                   ),
