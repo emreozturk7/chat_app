@@ -8,8 +8,7 @@ class ContactsController extends GetxController {
   var query = [].obs;
   var tempSearch = [].obs;
 
-  TextEditingController contactController = TextEditingController()
-    ..text = 'deneme';
+  Rx<TextEditingController> contactController = TextEditingController().obs;
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 

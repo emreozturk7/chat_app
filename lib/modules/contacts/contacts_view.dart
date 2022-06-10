@@ -134,11 +134,11 @@ class ContactsView extends StatelessWidget {
                   ),
                   trailing: GestureDetector(
                     onTap: () {
-                      String deger = _controller.tempSearch[index]['name'];
+                      _controller.contactController.value.text =
+                          _controller.tempSearch[index]['name'];
+                      _controller.tempSearch.clear();
+                      _controller.searchCtrl.clear();
                       Navigator.of(context, rootNavigator: true).pop(index);
-                      /* authCtrl.addNewConnection(
-                          _controller.tempSearch[index]['email'],
-                        ); */
                     },
                     child: Chip(
                       label: Text('Ekle'),

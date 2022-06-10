@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_app/controller/auth_controller.dart';
 import 'package:flutter_chat_app/core/context_extensions.dart';
 import 'package:flutter_chat_app/modules/contacts/contacts_controller.dart';
 import 'package:flutter_chat_app/modules/contacts/contacts_view.dart';
 import 'package:flutter_chat_app/routes/app_pages.dart';
 import 'package:get/get.dart';
 import 'package:date_format/date_format.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 
 class DateView extends StatefulWidget {
@@ -17,6 +17,7 @@ class DateView extends StatefulWidget {
 
 class _DateViewState extends State<DateView> {
   final ContactsController _controller = Get.put(ContactsController());
+  final authCtrl = Get.find<AuthController>();
 
   double? _height;
   double? _width;
@@ -251,7 +252,7 @@ class _DateViewState extends State<DateView> {
                       style: TextStyle(fontSize: 40),
                       textAlign: TextAlign.center,
                       enabled: false,
-                      controller: _controller.contactController,
+                      controller: _controller.contactController.value,
                       keyboardType: TextInputType.text,
                       decoration: InputDecoration(
                         disabledBorder: UnderlineInputBorder(
@@ -294,7 +295,11 @@ class _DateViewState extends State<DateView> {
                   ],
                 ),
               ),
-              onTap: () {},
+              onTap: () {
+                authCtrl.addNewConnection(
+                  _controller.contactController.value.text,
+                );
+              },
             ),
           ],
         ),
