@@ -27,13 +27,23 @@ class HomeView extends StatelessWidget {
               ),
               padding: EdgeInsets.fromLTRB(20, 30, 20, 20),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text(
-                    'Görüşmeler',
-                    style: TextStyle(
-                      fontSize: 35,
-                      fontWeight: FontWeight.bold,
+                children: [
+                  Expanded(
+                    flex: 8,
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.ac_unit),
+                    ),
+                  ),
+                  Spacer(flex: 4),
+                  Expanded(
+                    flex: 40,
+                    child: Text(
+                      'Görüşmeler',
+                      style: TextStyle(
+                        fontSize: 35,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],

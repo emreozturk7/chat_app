@@ -7,6 +7,11 @@ class ContactsController extends GetxController {
 
   var query = [].obs;
   var tempSearch = [].obs;
+  RxString name = ''.obs;
+  RxString date = ''.obs;
+  RxString hour = ''.obs;
+  RxString status = ''.obs;
+  RxString email = ''.obs;
 
   Rx<TextEditingController> contactController = TextEditingController().obs;
 

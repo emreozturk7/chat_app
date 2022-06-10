@@ -3,6 +3,7 @@ import 'package:flutter_chat_app/controller/auth_controller.dart';
 import 'package:flutter_chat_app/core/context_extensions.dart';
 import 'package:flutter_chat_app/modules/contacts/contacts_controller.dart';
 import 'package:flutter_chat_app/modules/contacts/contacts_view.dart';
+import 'package:flutter_chat_app/modules/date/date_controller.dart';
 import 'package:flutter_chat_app/routes/app_pages.dart';
 import 'package:get/get.dart';
 import 'package:date_format/date_format.dart';
@@ -17,6 +18,7 @@ class DateView extends StatefulWidget {
 
 class _DateViewState extends State<DateView> {
   final ContactsController _controller = Get.put(ContactsController());
+  final DateController _dateViewController = Get.put(DateController());
   final authCtrl = Get.find<AuthController>();
 
   double? _height;
@@ -295,9 +297,16 @@ class _DateViewState extends State<DateView> {
                   ],
                 ),
               ),
-              onTap: () {
+              onTap: () async {
+                _dateViewController.addNewMeet(
+                  email: _controller.email.value,
+                  date: _dateController.value.text.toString(),
+                  hour: _timeController.value.text.toString(),
+                  name: _controller.name.value,
+                  status: 'Waiting',
+                );
                 authCtrl.addNewConnection(
-                  _controller.contactController.value.text,
+                  _controller.email.value,
                 );
               },
             ),

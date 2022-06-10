@@ -1,8 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_app/model/meet_model.dart';
+import 'package:flutter_chat_app/service/database.dart';
 import 'package:get/get.dart';
 
 class DateController extends GetxController {
+  final Database _database = Database();
+  String collectionPath = 'database';
+
   late TextEditingController searchCtrl;
 
   var query = [].obs;
@@ -49,6 +54,40 @@ class DateController extends GetxController {
     }
     query.refresh();
     tempSearch.refresh();
+  }
+
+  Future<void> addNewMeet({
+    required String email,
+    required String date,
+    required String hour,
+    required String name,
+    required String status,
+  }) async {
+    Meet newStock = Meet(
+      email: email,
+      date: date,
+      hour: hour,
+      name: name,
+      status: status,
+    );
+
+    Future<void> addMeet() async {
+      CollectionReference database =
+          FirebaseFirestore.instance.collection('database');
+      final docCompany = database.doc('cozumbilisim').collection('stock');
+      return docCompany
+          .add({
+            'email': email,
+            'date': date,
+            'hour': hour,
+            'name': name,
+            'status': status,
+          })
+          .then((value) => print("Stock Added"))
+          .catchError((error) => print("Failed to add stock: $error"));
+    }
+
+    await _database.setMeetData(newStock.toMap(), email);
   }
 
   @override
