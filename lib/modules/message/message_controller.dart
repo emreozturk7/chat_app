@@ -38,7 +38,7 @@ class MessageController extends GetxController {
   }
 
   void newChat(String email, Map<String, dynamic> argument, String chat) async {
-    final key = Key.fromUtf8('32kelimeuzunlugundabirkeykeykeyk');
+    final key = Key.fromUtf8('f8S99f677dSf426SDsage2uU4Df25gDs');
     final iv = IV.fromLength(16);
 
     final encrypter = Encrypter(AES(key));

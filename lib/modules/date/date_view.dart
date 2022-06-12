@@ -96,7 +96,7 @@ class _DateViewState extends State<DateView> {
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Get.toNamed(Routes.CONTACTS_VIEW),
+        onPressed: () => Get.toNamed(Routes.START_CONVERSATION),
         child: Icon(
           Icons.search,
           size: 30,

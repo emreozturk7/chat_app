@@ -1,4 +1,5 @@
 import 'package:flutter_chat_app/modules/contacts/contacts_view.dart';
+import 'package:flutter_chat_app/modules/contacts/start_conversation.dart';
 import 'package:flutter_chat_app/modules/date/date_view.dart';
 import 'package:flutter_chat_app/modules/login/login_view.dart';
 import 'package:flutter_chat_app/modules/message/message_view.dart';
@@ -40,6 +41,10 @@ class AppPages {
     GetPage(
       name: _Paths.LOADING_VIEW,
       page: () => LoadingScreen(),
+    ),
+    GetPage(
+      name: _Paths.START_CONVERSATION,
+      page: () => StartConversation(),
     ),
   ];
 }

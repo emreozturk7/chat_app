@@ -134,6 +134,9 @@ class ContactsView extends StatelessWidget {
                   ),
                   trailing: GestureDetector(
                     onTap: () {
+                      authCtrl.addNewConnection(
+                          _controller.tempSearch[index]['email']);
+
                       _controller.name.value =
                           _controller.tempSearch[index]['name'];
                       _controller.email.value =
@@ -142,6 +145,7 @@ class ContactsView extends StatelessWidget {
                           _controller.tempSearch[index]['name'];
                       _controller.tempSearch.clear();
                       _controller.searchCtrl.clear();
+
                       Navigator.of(context, rootNavigator: true).pop(index);
                     },
                     child: Chip(

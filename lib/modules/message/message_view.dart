@@ -155,7 +155,7 @@ class MessageView extends StatelessWidget {
                       itemBuilder: (context, index) {
                         String gelenMesaj = "${allData[index]["message"]}";
                         final key =
-                            Key.fromUtf8('32kelimeuzunlugundabirkeykeykeyk');
+                            Key.fromUtf8('f8S99f677dSf426SDsage2uU4Df25gDs');
                         final iv = IV.fromLength(16);
 
                         final encrypter = Encrypter(AES(key));
