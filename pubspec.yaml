@@ -34,6 +34,8 @@ dependencies:
   emoji_picker_flutter: ^1.0.7
   date_format: ^2.0.6
 
+  encrypt: ^5.0.1
+
 
   cupertino_icons: ^1.0.2
   platform: ^3.1.0

@@ -1,12 +1,14 @@
 import 'dart:async';
+import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:flutter/material.dart';
+import 'package:encrypt/encrypt.dart';
+import 'package:flutter/material.dart' hide Key;
 import 'package:flutter_chat_app/controller/auth_controller.dart';
+import 'package:flutter_chat_app/modules/message/item_chat.dart';
 import 'package:flutter_chat_app/modules/message/message_controller.dart';
 import 'package:flutter_chat_app/modules/tracking/tracking_view.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 class MessageView extends StatelessWidget {
   final authC = Get.find<AuthController>();
@@ -141,6 +143,7 @@ class MessageView extends StatelessWidget {
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.active) {
                     var allData = snapshot.data!.docs;
+
                     Timer(
                       Duration.zero,
                       () => _controller.scroolCtrl.jumpTo(
@@ -150,6 +153,15 @@ class MessageView extends StatelessWidget {
                       controller: _controller.scroolCtrl,
                       itemCount: allData.length,
                       itemBuilder: (context, index) {
+                        String gelenMesaj = "${allData[index]["message"]}";
+                        final key =
+                            Key.fromUtf8('32kelimeuzunlugundabirkeykeykeyk');
+                        final iv = IV.fromLength(16);
+
+                        final encrypter = Encrypter(AES(key));
+
+                        var decrypted = encrypter.decrypt64(gelenMesaj, iv: iv);
+
                         if (index == 0) {
                           return Column(
                             children: [
@@ -161,7 +173,7 @@ class MessageView extends StatelessWidget {
                                 ),
                               ),
                               ItemChat(
-                                message: "${allData[index]["message"]}",
+                                message: decrypted,
                                 isSender: allData[index]["sender"] ==
                                         authC.user.value.email!
                                     ? true
@@ -174,7 +186,7 @@ class MessageView extends StatelessWidget {
                           if (allData[index]["groupTime"] ==
                               allData[index - 1]["groupTime"]) {
                             return ItemChat(
-                              message: "${allData[index]["message"]}",
+                              message: decrypted,
                               isSender: allData[index]["sender"] ==
                                       authC.user.value.email!
                                   ? true
@@ -191,7 +203,7 @@ class MessageView extends StatelessWidget {
                                   ),
                                 ),
                                 ItemChat(
-                                  message: "${allData[index]["message"]}",
+                                  message: decrypted,
                                   isSender: allData[index]["sender"] ==
                                           authC.user.value.email!
                                       ? true
@@ -307,61 +319,6 @@ class MessageView extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class ItemChat extends StatelessWidget {
-  const ItemChat({
-    Key? key,
-    required this.isSender,
-    required this.message,
-    required this.time,
-  }) : super(key: key);
-
-  final bool isSender;
-  final String message;
-  final String time;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        vertical: 15,
-        horizontal: 20,
-      ),
-      child: Column(
-        crossAxisAlignment:
-            isSender ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.red[900],
-              borderRadius: isSender
-                  ? BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      topRight: Radius.circular(15),
-                      bottomLeft: Radius.circular(15),
-                    )
-                  : BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      topRight: Radius.circular(15),
-                      bottomRight: Radius.circular(15),
-                    ),
-            ),
-            padding: EdgeInsets.all(15),
-            child: Text(
-              message,
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            ),
-          ),
-          SizedBox(height: 5),
-          Text(DateFormat.jm().format(DateTime.parse(time))),
-        ],
-      ),
-      alignment: isSender ? Alignment.centerRight : Alignment.centerLeft,
     );
   }
 }

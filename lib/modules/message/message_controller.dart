@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:flutter/material.dart';
+import 'package:encrypt/encrypt.dart';
+import 'package:flutter/material.dart' hide Key;
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -16,10 +17,10 @@ class MessageController extends GetxController {
   late TextEditingController chatCtrl;
   late ScrollController scroolCtrl;
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> streamChats(String chat_id) {
+  Stream<QuerySnapshot<Map<String, dynamic>>> streamChats(String chatId) {
     CollectionReference chats = firestore.collection('chats');
 
-    return chats.doc(chat_id).collection('chat').orderBy('time').snapshots();
+    return chats.doc(chatId).collection('chat').orderBy('time').snapshots();
   }
 
   Stream<DocumentSnapshot<Object?>> streamFriendData(String friendEmail) {
@@ -37,6 +38,15 @@ class MessageController extends GetxController {
   }
 
   void newChat(String email, Map<String, dynamic> argument, String chat) async {
+    final key = Key.fromUtf8('32kelimeuzunlugundabirkeykeykeyk');
+    final iv = IV.fromLength(16);
+
+    final encrypter = Encrypter(AES(key));
+
+    final encrypted = encrypter.encrypt(chat, iv: iv);
+
+    print('Şifrelenmiş: ' + encrypted.base64);
+
     if (chat != '') {
       CollectionReference chats = firestore.collection('chats');
       CollectionReference users = firestore.collection('users');
@@ -46,7 +56,7 @@ class MessageController extends GetxController {
       await chats.doc(argument['chat_id']).collection('chat').add({
         'sender': email,
         'receiver': argument['friendEmail'],
-        'message': chat,
+        'message': encrypted.base64,
         'time': date,
         'isRead': false,
         'groupTime': DateFormat.yMMMd('en_US').format(DateTime.parse(date)),
