@@ -57,37 +57,44 @@ class DateController extends GetxController {
   }
 
   Future<void> addNewMeet({
-    required String email,
+    required String senderEmail,
+    required String receiverEmail,
     required String date,
     required String hour,
-    required String name,
+    required String senderName,
+    required String receiverName,
     required String status,
   }) async {
-    Meet newStock = Meet(
-      email: email,
+    Meet newMeet = Meet(
+      senderEmail: senderEmail,
+      receiverEmail: receiverEmail,
       date: date,
       hour: hour,
-      name: name,
+      senderName: senderName,
+      receiverName: receiverName,
       status: status,
     );
 
     Future<void> addMeet() async {
       CollectionReference database =
-          FirebaseFirestore.instance.collection('database');
-      final docCompany = database.doc('cozumbilisim').collection('stock');
+          FirebaseFirestore.instance.collection('users');
+      final docCompany = database.doc(senderEmail).collection('meet');
       return docCompany
           .add({
-            'email': email,
+            'senderEmail': senderEmail,
+            'receiverEmail': receiverEmail,
             'date': date,
             'hour': hour,
-            'name': name,
+            'senderName': senderName,
+            'receiverName': receiverName,
             'status': status,
           })
-          .then((value) => print("Stock Added"))
-          .catchError((error) => print("Failed to add stock: $error"));
+          .then((value) => print("Meet Added"))
+          .catchError((error) => print("Failed to add meet: $error"));
     }
 
-    await _database.setMeetData(newStock.toMap(), email);
+    await _database.setMeetData(newMeet.toMap(), senderEmail);
+    await _database.setMeetData(newMeet.toMap(), receiverEmail);
   }
 
   @override

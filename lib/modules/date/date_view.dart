@@ -254,7 +254,7 @@ class _DateViewState extends State<DateView> {
                       style: TextStyle(fontSize: 40),
                       textAlign: TextAlign.center,
                       enabled: false,
-                      controller: _controller.contactController.value,
+                      controller: _controller.receiverName.value,
                       keyboardType: TextInputType.text,
                       decoration: InputDecoration(
                         disabledBorder: UnderlineInputBorder(
@@ -299,14 +299,13 @@ class _DateViewState extends State<DateView> {
               ),
               onTap: () async {
                 _dateViewController.addNewMeet(
-                  email: _controller.email.value,
-                  date: _dateController.value.text.toString(),
-                  hour: _timeController.value.text.toString(),
-                  name: _controller.name.value,
+                  senderEmail: authCtrl.user.value.email.toString(), //okey
+                  receiverEmail: _controller.receiverEmail.value, //okey
+                  date: _dateController.value.text.toString(), //okey
+                  hour: _timeController.value.text.toString(), //okey
+                  senderName: authCtrl.user.value.name.toString(), // okey
+                  receiverName: _controller.receiverName.value.text, //okey
                   status: 'Waiting',
-                );
-                authCtrl.addNewConnection(
-                  _controller.email.value,
                 );
               },
             ),

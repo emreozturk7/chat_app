@@ -28,6 +28,7 @@ class AuthController extends GetxController {
   }
 
   Future<bool> autoLogin() async {
+    print(user);
     try {
       final isSignIn = await _googleSignIn.isSignedIn();
       if (isSignIn) {

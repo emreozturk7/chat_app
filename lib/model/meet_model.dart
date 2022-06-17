@@ -1,34 +1,42 @@
 class Meet {
-  String? email;
+  String? senderEmail;
+  String? receiverEmail;
   String? date;
   String? hour;
-  String? name;
+  String? senderName;
+  String? receiverName;
   String? status;
 
   Meet({
-    this.email,
+    this.senderEmail,
+    this.receiverEmail,
     this.date,
     this.hour,
-    this.name,
+    this.receiverName,
+    this.senderName,
     this.status,
   });
 
   Map<String, dynamic> toMap() {
     return {
-      'email': email,
+      'senderEmail': senderEmail,
+      'receiverEmail': receiverEmail,
+      'senderName': senderName,
+      'receiverName': receiverName,
       'date': date,
       'hour': hour,
-      'name': name,
       'status': status,
     };
   }
 
   factory Meet.fromMap(Map map) {
     return Meet(
-      email: map['email'],
+      senderEmail: map['senderEmail'],
+      receiverEmail: map['receiverEmail'],
       date: map['date'],
       hour: map['hour'],
-      name: map['name'],
+      senderName: map['senderName'],
+      receiverName: map['receiverName'],
       status: map['status'],
     );
   }
