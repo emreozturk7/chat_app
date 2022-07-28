@@ -1,19 +1,15 @@
-# Arkadaş takip ve buluşma ayarlama uygulaması
+# Arkadaş Takip Uygulaması DEMO
 
-## Özet:
-### Flutter ve Firebase kullanılarak yapılan anlık mesajlaşma ve arkadaşların ile buluşma ayarlayıp buluşma zamanına göre arkadaşını harita yardımı ile anlık takip etmeye yarayan bir mobil uygulama.
+## Proje tanıtım videosu
+[Proje tanıtım videosu için tıklayınız.](https://www.youtube.com/watch?v=Jlaaa_5NTWU)
 
-## Uygulama içi ekran görüntüleri:
+## Proje APK dosyası
+[APK Dosyasını indirmek için buraya tıklayın ve açılan sayfada download'a tıklayınız.](https://github.com/emreozturk7/friend_tracking/blob/master/app-release.apk)
 
-<p>
-  <img src= "screenshots/Simulator Screen Shot - iPhone 11 - 2022-07-28 at 17.49.12.png" width=200 heigth=200>
-  <img src= "screenshots/Simulator Screen Shot - iPhone 11 - 2022-07-28 at 17.52.27.png" width=200 heigth=200>
-  <img src= "screenshots/Simulator Screen Shot - iPhone 11 - 2022-07-28 at 18.16.03.png" width=200 heigth=200>
-  <img src= "screenshots/Simulator Screen Shot - iPhone 11 - 2022-07-28 at 17.54.14.png" width=200 heigth=200>
-</p>
-<p>
-  <img src= "screenshots/Simulator Screen Shot - iPhone 11 - 2022-07-28 at 17.54.05.png" width=200 heigth=200>
-  <img src= "screenshots/Simulator Screen Shot - iPhone 11 - 2022-07-28 at 17.54.26.png" width=200 heigth=200>
-  <img src= "screenshots/Simulator Screen Shot - iPhone 11 - 2022-07-28 at 17.53.19.png" width=200 heigth=200>
-  <img src= "screenshots/Simulator Screen Shot - iPhone 11 - 2022-07-28 at 17.53.08.png" width=200 heigth=200>
-</p>
+## Proje dökümantasyonu
+[Proje dökümantasyonu için tıklayınız.](https://github.com/emreozturk7/friend_tracking/files/8886344/180541023_Emre_OZTURK_YMGK.docx)
+
+## Üretilen bit ve NIST test sonucu
+[Üretilen 1.000.000 bit için tıklayınız.](https://github.com/emreozturk7/friend_tracking/files/8886338/uretilenbit.txt)
+
+[NIST Test sonucu için tıklayınız.](https://github.com/emreozturk7/friend_tracking/files/8886339/testsonucu.txt)
