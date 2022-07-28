@@ -134,11 +134,12 @@ class ContactsView extends StatelessWidget {
                   ),
                   trailing: GestureDetector(
                     onTap: () {
-                      print('${_controller.tempSearch[index]['email']}');
                       _controller.receiverEmail.value =
                           _controller.tempSearch[index]['email'];
                       _controller.receiverName.value.text =
                           _controller.tempSearch[index]['name'];
+                      _controller.receiverPhotoUrl.value =
+                          _controller.tempSearch[index]['photoUrl'];
                       _controller.tempSearch.clear();
                       _controller.searchCtrl.clear();
 

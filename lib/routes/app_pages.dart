@@ -2,6 +2,7 @@ import 'package:flutter_chat_app/modules/contacts/contacts_view.dart';
 import 'package:flutter_chat_app/modules/contacts/start_conversation.dart';
 import 'package:flutter_chat_app/modules/date/date_view.dart';
 import 'package:flutter_chat_app/modules/login/login_view.dart';
+import 'package:flutter_chat_app/modules/meets/meet_view.dart';
 import 'package:flutter_chat_app/modules/message/message_view.dart';
 import 'package:flutter_chat_app/modules/tracking/tracking_view.dart';
 import 'package:flutter_chat_app/modules/home/home_view.dart';
@@ -45,6 +46,10 @@ class AppPages {
     GetPage(
       name: _Paths.START_CONVERSATION,
       page: () => StartConversation(),
+    ),
+    GetPage(
+      name: _Paths.MEET_VIEW,
+      page: () => MeetView(),
     ),
   ];
 }

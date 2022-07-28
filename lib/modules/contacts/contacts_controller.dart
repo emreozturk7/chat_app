@@ -9,6 +9,7 @@ class ContactsController extends GetxController {
   var tempSearch = [].obs;
 
   RxString receiverEmail = ''.obs;
+  RxString receiverPhotoUrl = ''.obs;
   Rx<TextEditingController> receiverName = TextEditingController().obs;
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;

@@ -11,6 +11,7 @@ abstract class Routes {
   static const DATE_VIEW = _Paths.DATE_VIEW;
   static const LOADING_VIEW = _Paths.LOADING_VIEW;
   static const START_CONVERSATION = _Paths.START_CONVERSATION;
+  static const MEET_VIEW = _Paths.MEET_VIEW;
 }
 
 abstract class _Paths {
@@ -22,4 +23,5 @@ abstract class _Paths {
   static const DATE_VIEW = '/date_view';
   static const LOADING_VIEW = '/loading_screen';
   static const START_CONVERSATION = '/start_conversation';
+  static const MEET_VIEW = '/meet_view';
 }

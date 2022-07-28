@@ -1,14 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/controller/auth_controller.dart';
+import 'package:flutter_chat_app/modules/contacts/contacts_controller.dart';
 import 'package:flutter_chat_app/modules/home/home_controller.dart';
-import 'package:flutter_chat_app/modules/meets/meet_view.dart';
 import 'package:flutter_chat_app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class HomeView extends StatelessWidget {
   final authC = Get.find<AuthController>();
   final HomeController _controller = Get.put(HomeController());
+  final ContactsController _contactsController = Get.put(ContactsController());
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,7 @@ class HomeView extends StatelessWidget {
                     flex: 8,
                     child: IconButton(
                       onPressed: () {
-                        Get.to(MeetView());
+                        Get.toNamed(Routes.MEET_VIEW);
                       },
                       icon: Icon(Icons.ac_unit),
                     ),

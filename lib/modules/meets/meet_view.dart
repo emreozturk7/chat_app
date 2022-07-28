@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/controller/auth_controller.dart';
+import 'package:flutter_chat_app/modules/contacts/contacts_controller.dart';
 import 'package:get/get.dart';
 
 class MeetView extends StatelessWidget {
   final authC = Get.find<AuthController>();
+  final ContactsController _controller = Get.put(ContactsController());
 
   @override
   Widget build(BuildContext context) {
@@ -63,20 +65,37 @@ class MeetView extends StatelessWidget {
                   );
                 } else {
                   return ListView(
+                    padding: EdgeInsets.zero,
                     children:
                         snapshot.data!.docs.map((DocumentSnapshot document) {
                       Map<String, dynamic> data =
                           document.data()! as Map<String, dynamic>;
                       return Container(
+                        padding: EdgeInsets.only(bottom: 10, top: 10),
+                        decoration: BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                              color: Colors.black38,
+                            ),
+                          ),
+                        ),
                         child: Row(
                           children: [
                             Expanded(
-                              child: Image.network(
-                                  authC.user.value.photoUrl.toString()),
+                              child: CircleAvatar(
+                                radius: 35,
+                                backgroundImage: NetworkImage(
+                                  data["receiverPhotoUrl"],
+                                ),
+                              ),
                             ),
                             Expanded(
                               child: Text(
-                                '${data['name']}',
+                                '${data['receiverName']}',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                             Expanded(
@@ -92,7 +111,43 @@ class MeetView extends StatelessWidget {
                               ),
                             ),
                             Expanded(
-                              child: Text(data['status'].toString()),
+                              child: data['status'].toString() == "Waiting"
+                                  ? Row(
+                                      children: [
+                                        InkWell(
+                                          child: Icon(
+                                            Icons.check,
+                                            color: Colors.green,
+                                            size: 35,
+                                          ),
+                                          onTap: () {},
+                                        ),
+                                        SizedBox(width: 10),
+                                        InkWell(
+                                          child: Icon(
+                                            Icons.close,
+                                            color: Colors.red,
+                                            size: 35,
+                                          ),
+                                          onTap: () {},
+                                        ),
+                                      ],
+                                    )
+                                  : data['status'].toString() == "Accepted"
+                                      ? Text(
+                                          'Kabul edildi',
+                                          style: TextStyle(
+                                            color: Colors.green,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        )
+                                      : Text(
+                                          'Reddedildi',
+                                          style: TextStyle(
+                                            color: Colors.red,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
                             ),
                           ],
                         ),

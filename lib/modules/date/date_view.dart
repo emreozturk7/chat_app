@@ -299,14 +299,17 @@ class _DateViewState extends State<DateView> {
               ),
               onTap: () async {
                 _dateViewController.addNewMeet(
-                  senderEmail: authCtrl.user.value.email.toString(), //okey
-                  receiverEmail: _controller.receiverEmail.value, //okey
-                  date: _dateController.value.text.toString(), //okey
-                  hour: _timeController.value.text.toString(), //okey
-                  senderName: authCtrl.user.value.name.toString(), // okey
-                  receiverName: _controller.receiverName.value.text, //okey
+                  senderEmail: authCtrl.user.value.email.toString(),
+                  receiverEmail: _controller.receiverEmail.value,
+                  date: _dateController.value.text.toString(),
+                  hour: _timeController.value.text.toString(),
+                  senderName: authCtrl.user.value.name.toString(),
+                  receiverName: _controller.receiverName.value.text,
+                  receiverPhotoUrl: _controller.receiverPhotoUrl.value,
+                  senderPhotoUrl: authCtrl.user.value.photoUrl.toString(),
                   status: 'Waiting',
                 );
+                Get.back();
               },
             ),
           ],

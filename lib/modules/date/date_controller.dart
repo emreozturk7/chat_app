@@ -64,6 +64,8 @@ class DateController extends GetxController {
     required String senderName,
     required String receiverName,
     required String status,
+    required String senderPhotoUrl,
+    required String receiverPhotoUrl,
   }) async {
     Meet newMeet = Meet(
       senderEmail: senderEmail,
@@ -73,6 +75,8 @@ class DateController extends GetxController {
       senderName: senderName,
       receiverName: receiverName,
       status: status,
+      senderPhotoUrl: senderPhotoUrl,
+      receiverPhotoUrl: receiverPhotoUrl,
     );
 
     Future<void> addMeet() async {
@@ -88,6 +92,8 @@ class DateController extends GetxController {
             'senderName': senderName,
             'receiverName': receiverName,
             'status': status,
+            'senderPhotoUrl': senderPhotoUrl,
+            'receiverPhotoUrl': receiverPhotoUrl,
           })
           .then((value) => print("Meet Added"))
           .catchError((error) => print("Failed to add meet: $error"));

@@ -1,16 +1,15 @@
-# flutter_chat_app
+# Arkadaş Takip Uygulaması DEMO
 
-A new Flutter project.
+## Proje tanıtım videosu
+[Proje tanıtım videosu için tıklayınız.](https://www.youtube.com/watch?v=Jlaaa_5NTWU)
 
-## Getting Started
+## Proje APK dosyası
+[APK Dosyasını indirmek için buraya tıklayın ve açılan sayfada download'a tıklayınız.](https://github.com/emreozturk7/friend_tracking/blob/master/app-release.apk)
 
-This project is a starting point for a Flutter application.
+## Proje dökümantasyonu
+[Proje dökümantasyonu için tıklayınız.](https://github.com/emreozturk7/friend_tracking/files/8886344/180541023_Emre_OZTURK_YMGK.docx)
 
-A few resources to get you started if this is your first Flutter project:
+## Üretilen bit ve NIST test sonucu
+[Üretilen 1.000.000 bit için tıklayınız.](https://github.com/emreozturk7/friend_tracking/files/8886338/uretilenbit.txt)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+[NIST Test sonucu için tıklayınız.](https://github.com/emreozturk7/friend_tracking/files/8886339/testsonucu.txt)

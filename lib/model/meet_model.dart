@@ -6,6 +6,8 @@ class Meet {
   String? senderName;
   String? receiverName;
   String? status;
+  String? senderPhotoUrl;
+  String? receiverPhotoUrl;
 
   Meet({
     this.senderEmail,
@@ -15,6 +17,8 @@ class Meet {
     this.receiverName,
     this.senderName,
     this.status,
+    this.receiverPhotoUrl,
+    this.senderPhotoUrl,
   });
 
   Map<String, dynamic> toMap() {
@@ -26,6 +30,8 @@ class Meet {
       'date': date,
       'hour': hour,
       'status': status,
+      'senderPhotoUrl': senderPhotoUrl,
+      'receiverPhotoUrl': receiverPhotoUrl,
     };
   }
 
@@ -38,6 +44,8 @@ class Meet {
       senderName: map['senderName'],
       receiverName: map['receiverName'],
       status: map['status'],
+      senderPhotoUrl: map['senderPhotoUrl'],
+      receiverPhotoUrl: map['receiverPhotoUrl'],
     );
   }
 }
